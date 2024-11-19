@@ -13,10 +13,15 @@ const NavBar: React.FC = () => {
   const userWithRole = session?.user as { email: string; randomKey: string };
   const role = userWithRole?.randomKey;
   const pathName = usePathname();
+  const menuStyle = { marginBottom: '0px' };
+  const navbarClassName = currentUser ? 'bg-dark' : 'bg-light';
+
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg" style={menuStyle} className={navbarClassName}>
       <Container>
-        <Navbar.Brand href="/">Next.js Application Template</Navbar.Brand>
+        <Navbar.Brand href="/" className="align-items-center">
+          <span style={{ fontWeight: 800, fontSize: '24px' }}>Weekend Warrior</span>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
@@ -38,27 +43,31 @@ const NavBar: React.FC = () => {
               ''
             )}
           </Nav>
-          <Nav>
+          <Nav className="justify-content-end">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
                   <BoxArrowRight />
-                  Sign Out
+{' '}
+Sign Out
                 </NavDropdown.Item>
                 <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
                   <Lock />
-                  Change Password
+{' '}
+Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <NavDropdown id="login-dropdown" title="Login">
                 <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
                   <PersonFill />
-                  Sign in
+{' '}
+Sign in
                 </NavDropdown.Item>
                 <NavDropdown.Item id="login-dropdown-sign-up" href="/auth/signup">
                   <PersonPlusFill />
-                  Sign up
+{' '}
+Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             )}
