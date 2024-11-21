@@ -26,7 +26,7 @@ const AddActivity = ({ activity }: { activity: Activity }) => (
       </Card.Text>
     </Card.Body>
     <Card.Footer>
-      <Link href={`edit/${activity.id}`}>Edit</Link>
+      <Link href={`edit/${activity.id}`}>Sign up!</Link>
     </Card.Footer>
   </Card>
 );
