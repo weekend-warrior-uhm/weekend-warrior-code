@@ -16,7 +16,7 @@ const AddStuff = async () => {
     } | null,
   );
   */
-  const contacts: Activity[] = await prisma.activity.findMany({});
+  const activities: Activity[] = await prisma.activity.findMany({});
 
   return (
     <main>
@@ -25,7 +25,7 @@ const AddStuff = async () => {
           <Col>
             <h2 className="text-center">Activities</h2>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {contacts.map((activity) => (
+              {activities.map((activity) => (
                 <Col key={activity.name}>
                   <AddActivity
                     activity={activity}
