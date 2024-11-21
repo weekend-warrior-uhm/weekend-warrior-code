@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import swal from 'sweetalert';
@@ -38,6 +38,8 @@ const ShowActivities: React.FC = () => {
     redirect('/auth/signin');
   }
   */
+
+  console.log(currentUser, register, handleSubmit, reset, errors, onSubmit);
 
   return (
     <Container className="py-3">
