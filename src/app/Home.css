@@ -1,0 +1,40 @@
+/* Info box styles */
+.info-box {
+    background-color: rgba(0, 0, 0, 0.3); /* Black with 30% transparency */
+    color: white;
+    padding: 2rem; /* Responsive padding */
+    border-radius: 10px;
+    width: 90%; /* Extend width closer to the sides */
+    max-width: 900px; /* Adjust max-width as needed */
+    text-align: center;
+    position: relative;
+    margin: 10% auto; /* Center the box and give equal top/bottom spacing */
+    transform: none; /* Remove transform for better responsiveness */
+  }
+  
+  /* Logo styles */
+  .logo {
+    max-width: 100%; /* Ensure logo fits within its container */
+    height: auto;
+    margin-bottom: 20px; /* Space below the logo */
+    background-color: transparent; /* Ensure background is transparent */
+  }
+  
+  .info-box h1 {
+    font-size: 3rem; /* Increase font size for h1 to twice the original */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow to h1 */
+  }
+  
+  .info-box p {
+    font-size: 1.5rem; /* Increase font size for p to twice the original */
+    margin-bottom: 20px;
+    line-height: 1.5; /* Add line height for better readability */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Add shadow to p */
+  }
+  
+  .container-fluid {
+    position: relative;
+    z-index: 1;
+  }
+  
