@@ -8,6 +8,7 @@
   --bowfolio-navbar-text: white;
   --bowfolio-navbar-highlight-text: var(--bs-gray-500);
 }
+
 /* Change bootstrap variable values.
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
@@ -16,6 +17,17 @@ body {
   --bs-dark-rgb: var(--bowfolio-navbar-bg-rgb);
   background-image: url("/images/bgs-blurred.png");
   background-size: cover;
+  background-repeat: no-repeat; /* Ensure the background image does not repeat */
+  background-position: center; /* Center the background image */
+  background-attachment: fixed; /* Ensure the background image stays fixed in place */
+  background-color: #000000; /* Set a default background color */
+}
+
+/* Responsive background image adjustments */
+@media (max-width: 768px) {
+  body {
+    background-size: contain; /* Adjust the background size to contain for smaller screens */
+  }
 }
 
 /* Responsive background image adjustments */
@@ -38,7 +50,6 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-
 
 /* Color the light Brand and links with dark color */
 .bg-light span, .bg-light a {
