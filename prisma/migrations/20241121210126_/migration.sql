@@ -25,5 +25,18 @@ CREATE TABLE "Stuff" (
     CONSTRAINT "Stuff_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Activity" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "location" TEXT NOT NULL,
+    "date" TEXT NOT NULL,
+    "time" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+
+    CONSTRAINT "Activity_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
