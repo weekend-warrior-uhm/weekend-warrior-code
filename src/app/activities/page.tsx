@@ -2,7 +2,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
 // import { loggedInProtectedPage } from '@/lib/page-protection';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';.
 import { Activity } from '@prisma/client';
 import AddActivity from '@/components/AddActivity';
 
