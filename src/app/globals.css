@@ -18,6 +18,13 @@ body {
   background-size: cover;
 }
 
+/* Responsive background image adjustments */
+@media (max-width: 768px) {
+  body {
+    background-size: contain; /* Adjust the background size to contain for smaller screens */
+  }
+}
+
 html, body {
   box-sizing: border-box;
   height: 100%;
