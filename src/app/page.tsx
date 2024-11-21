@@ -1,21 +1,36 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import Image from 'next/image';
+import './home.css'; // Import the CSS file
 
 /** The Home page. */
 const Home = () => (
   <main>
     <div id="landing-page">
-      <div className="landing-green-background">
-        <Container fluid className="py-3 text-center">
-          <Row className="align-middle">
-
-            <Col className="d-flex flex-column justify-content-center">
-              <h3 style={{ paddingBottom: '20px', color: 'white' }}>
-                What are your plans for the weekend?
-              </h3>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <Container className="info-box">
+        <Image
+          src="/images/WWLogo.png"
+          alt="Weekend Warrior Logo"
+          width={500}
+          height={500}
+          priority // Ensures the image loads quickly
+        />
+        <h1>Welcome to Weekend Warrior!</h1>
+        <p>
+          Weekend Warrior is a Web App designed
+          {' '}
+          <br />
+          to connect UH Manoa students and locals
+          {' '}
+          <br />
+          interested in weekend outdoor activities.
+        </p>
+        <p>
+          Our platform will help people find activity partners
+          {' '}
+          <br />
+          with similar interests and schedules.
+        </p>
+      </Container>
     </div>
   </main>
 );
