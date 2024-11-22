@@ -1,12 +1,9 @@
-// import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-// import { loggedInProtectedPage } from '@/lib/page-protection';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Activity } from '@prisma/client';
 import AddActivity from '@/components/AddActivity';
 
-const AddStuff = async () => {
+const ActivitiesPage = async () => {
   /* This is for protecting the page so that only signed in users can access:
 
   const session = await getServerSession(authOptions);
@@ -25,11 +22,17 @@ const AddStuff = async () => {
           <Col>
             <h2 className="text-center">Activities</h2>
             <Row xs={1} md={2} lg={3} className="g-4">
+<<<<<<< Updated upstream
               {contacts.map((activity) => (
                 <Col key={activity.name}>
                   <AddActivity
                     activity={activity}
                   />
+=======
+              {activities.map((activity) => (
+                <Col key={activity.id}>
+                  <AddActivity activity={activity} />
+>>>>>>> Stashed changes
                 </Col>
               ))}
             </Row>
@@ -40,4 +43,4 @@ const AddStuff = async () => {
   );
 };
 
-export default AddStuff;
+export default ActivitiesPage;

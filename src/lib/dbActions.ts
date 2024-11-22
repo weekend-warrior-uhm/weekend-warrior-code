@@ -1,30 +1,25 @@
 'use server';
 
-import { Stuff, Condition } from '@prisma/client';
+import { Activity } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
 
 /**
- * Adds a new stuff to the database.
- * @param stuff, an object with the following properties: name, quantity, owner, condition.
+ * Adds a new activity to the database.
+ * @param activity, an object with the following properties:
+ * name, description, location, date, time, author.
  */
-export async function addStuff(stuff: { name: string; quantity: number; owner: string; condition: string }) {
-  // console.log(`addStuff data: ${JSON.stringify(stuff, null, 2)}`);
-  let condition: Condition = 'good';
-  if (stuff.condition === 'poor') {
-    condition = 'poor';
-  } else if (stuff.condition === 'excellent') {
-    condition = 'excellent';
-  } else {
-    condition = 'fair';
-  }
-  await prisma.stuff.create({
+// eslint-disable-next-line max-len
+export async function addActivity(activity: { name: string; description: string; location: string; date: string; time: string; author: string }) {
+  await prisma.activity.create({
     data: {
-      name: stuff.name,
-      quantity: stuff.quantity,
-      owner: stuff.owner,
-      condition,
+      name: activity.name,
+      description: activity.description,
+      location: activity.location,
+      date: activity.date,
+      time: activity.time,
+      author: activity.author,
     },
   });
   // After adding, redirect to the list page
@@ -32,18 +27,20 @@ export async function addStuff(stuff: { name: string; quantity: number; owner: s
 }
 
 /**
- * Edits an existing stuff in the database.
- * @param stuff, an object with the following properties: id, name, quantity, owner, condition.
+ * Edits an existing activity in the database.
+ * @param activity, an object with the following properties:
+ * id, name, description, location, date, time, author.
  */
-export async function editStuff(stuff: Stuff) {
-  // console.log(`editStuff data: ${JSON.stringify(stuff, null, 2)}`);
-  await prisma.stuff.update({
-    where: { id: stuff.id },
+export async function editActivity(activity: Activity) {
+  await prisma.activity.update({
+    where: { id: activity.id },
     data: {
-      name: stuff.name,
-      quantity: stuff.quantity,
-      owner: stuff.owner,
-      condition: stuff.condition,
+      name: activity.name,
+      description: activity.description,
+      location: activity.location,
+      date: activity.date,
+      time: activity.time,
+      author: activity.author,
     },
   });
   // After updating, redirect to the list page
@@ -51,12 +48,11 @@ export async function editStuff(stuff: Stuff) {
 }
 
 /**
- * Deletes an existing stuff from the database.
- * @param id, the id of the stuff to delete.
+ * Deletes an existing activity from the database.
+ * @param id, the id of the activity to delete.
  */
-export async function deleteStuff(id: number) {
-  // console.log(`deleteStuff id: ${id}`);
-  await prisma.stuff.delete({
+export async function deleteActivity(id: number) {
+  await prisma.activity.delete({
     where: { id },
   });
   // After deleting, redirect to the list page
@@ -65,10 +61,10 @@ export async function deleteStuff(id: number) {
 
 /**
  * Creates a new user in the database.
- * @param credentials, an object with the following properties: email, password.
+ * @param credentials, an object with the following properties:
+ * email, password.
  */
 export async function createUser(credentials: { email: string; password: string }) {
-  // console.log(`createUser data: ${JSON.stringify(credentials, null, 2)}`);
   const password = await hash(credentials.password, 10);
   await prisma.user.create({
     data: {
@@ -80,10 +76,10 @@ export async function createUser(credentials: { email: string; password: string 
 
 /**
  * Changes the password of an existing user in the database.
- * @param credentials, an object with the following properties: email, password.
+ * @param credentials, an object with the following properties:
+ * email, password.
  */
 export async function changePassword(credentials: { email: string; password: string }) {
-  // console.log(`changePassword data: ${JSON.stringify(credentials, null, 2)}`);
   const password = await hash(credentials.password, 10);
   await prisma.user.update({
     where: { email: credentials.email },
