@@ -36,6 +36,14 @@ enum Condition {
   poor
 }
 
+model Stuff {
+  id        Int       @id @default(autoincrement())
+  name      String
+  quantity  Int
+  condition Condition
+  owner     String
+}
+
 model Activity {
   id            Int      @id @default(autoincrement())
   name          String
