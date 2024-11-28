@@ -11,7 +11,7 @@ import { editActivity } from '@/lib/dbActions';
 const onSubmit = async (data: Activity) => {
   // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
   await editActivity(data);
-  swal('Success', 'Your item has been updated', 'success', {
+  swal('Success', 'The activity has been updated', 'success', {
     timer: 2000,
   });
 };
