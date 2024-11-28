@@ -10,6 +10,7 @@ export const EditActivitySchema = Yup.object({
   author: Yup.string().required(),
   author_email: Yup.string().required(),
   duration: Yup.number().required(),
+  registered: Yup.array().of(Yup.string()).required(),
 });
 
 export const test = Yup.object({

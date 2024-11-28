@@ -22,6 +22,7 @@ export async function editActivity(data: Activity) {
       author: data.author,
       author_email: data.author_email,
       duration: data.duration,
+      registered: data.registered,
     },
   });
   // After updating, redirect to the activites page

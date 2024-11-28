@@ -27,6 +27,10 @@ const AddActivity = ({ activity }: { activity: Activity }) => (
         Activity by:&nbsp;
         {activity.author}
       </Card.Text>
+      <Card.Text>
+        Total Registered Users:&nbsp;
+        {activity.registered.length}
+      </Card.Text>
     </Card.Body>
     <Card.Footer>
       <Link href={`edit/${activity.id}`}>Sign up!</Link>

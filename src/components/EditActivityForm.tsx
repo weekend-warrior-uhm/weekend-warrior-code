@@ -107,6 +107,7 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                 </Form.Group>
                 <input type="hidden" {...register('author')} value={activity.author} />
                 <input type="hidden" {...register('author_email')} value={activity.author_email} />
+                <input type="hidden" {...register('registered')} value={activity.registered} />
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
