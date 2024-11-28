@@ -1,16 +1,17 @@
 import * as Yup from 'yup';
 
-export const AddStuffSchema = Yup.object({
-  name: Yup.string().required(),
-  quantity: Yup.number().positive().required(),
-  condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
-  owner: Yup.string().required(),
-});
-
-export const EditStuffSchema = Yup.object({
+export const EditActivitySchema = Yup.object({
   id: Yup.number().required(),
   name: Yup.string().required(),
-  quantity: Yup.number().positive().required(),
-  condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
-  owner: Yup.string().required(),
+  description: Yup.string().required(),
+  location: Yup.string().required(),
+  date: Yup.string().required(),
+  time: Yup.string().required(),
+  author: Yup.string().required(),
+  author_email: Yup.string().required(),
+  duration: Yup.number().required(),
+});
+
+export const test = Yup.object({
+  name: Yup.string().required(),
 });

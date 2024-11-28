@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { Activity } from '@prisma/client';
 import AddActivity from '@/components/AddActivity';
 
-const AddStuff = async () => {
+const ActivitiesPage = async () => {
   /* This is for protecting the page so that only signed in users can access:
 
   const session = await getServerSession(authOptions);
@@ -40,4 +40,4 @@ const AddStuff = async () => {
   );
 };
 
-export default AddStuff;
+export default ActivitiesPage;

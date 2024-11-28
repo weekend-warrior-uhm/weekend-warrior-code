@@ -1,62 +1,40 @@
 'use server';
 
-import { Stuff, Condition } from '@prisma/client';
+import { Activity } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
 
 /**
- * Adds a new stuff to the database.
- * @param stuff, an object with the following properties: name, quantity, owner, condition.
+ * Edits an existing activity in the database.
+ * @param activity, an object with the following properties: id, name, quantity, owner, condition.
  */
-export async function addStuff(stuff: { name: string; quantity: number; owner: string; condition: string }) {
-  // console.log(`addStuff data: ${JSON.stringify(stuff, null, 2)}`);
-  let condition: Condition = 'good';
-  if (stuff.condition === 'poor') {
-    condition = 'poor';
-  } else if (stuff.condition === 'excellent') {
-    condition = 'excellent';
-  } else {
-    condition = 'fair';
-  }
-  await prisma.stuff.create({
+export async function editActivity(data: Activity) {
+  // console.log(`editActivity data: ${JSON.stringify(activity, null, 2)}`);
+  await prisma.activity.update({
+    where: { id: data.id },
     data: {
-      name: stuff.name,
-      quantity: stuff.quantity,
-      owner: stuff.owner,
-      condition,
+      name: data.name,
+      description: data.description,
+      location: data.location,
+      date: data.date,
+      time: data.time,
+      author: data.author,
+      author_email: data.author_email,
+      duration: data.duration,
     },
   });
-  // After adding, redirect to the list page
-  redirect('/list');
+  // After updating, redirect to the activites page
+  redirect('/activities');
 }
 
 /**
- * Edits an existing stuff in the database.
- * @param stuff, an object with the following properties: id, name, quantity, owner, condition.
+ * Deletes an existing activity from the database.
+ * @param id, the id of the activity to delete.
  */
-export async function editStuff(stuff: Stuff) {
-  // console.log(`editStuff data: ${JSON.stringify(stuff, null, 2)}`);
-  await prisma.stuff.update({
-    where: { id: stuff.id },
-    data: {
-      name: stuff.name,
-      quantity: stuff.quantity,
-      owner: stuff.owner,
-      condition: stuff.condition,
-    },
-  });
-  // After updating, redirect to the list page
-  redirect('/list');
-}
-
-/**
- * Deletes an existing stuff from the database.
- * @param id, the id of the stuff to delete.
- */
-export async function deleteStuff(id: number) {
-  // console.log(`deleteStuff id: ${id}`);
-  await prisma.stuff.delete({
+export async function deleteActivity(id: number) {
+  // console.log(`deleteActivity id: ${id}`);
+  await prisma.activity.delete({
     where: { id },
   });
   // After deleting, redirect to the list page

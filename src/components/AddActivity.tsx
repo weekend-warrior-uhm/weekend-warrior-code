@@ -17,11 +17,14 @@ const AddActivity = ({ activity }: { activity: Activity }) => (
       <Card.Text>{activity.location}</Card.Text>
       <Card.Text>
         {activity.date}
-        &ensp;@&ensp;
+        &nbsp;@&nbsp;
         {activity.time}
+        &nbsp;(
+        {activity.duration}
+        &nbsp;hours)
       </Card.Text>
       <Card.Text>
-        Activity by:&ensp;
+        Activity by:&nbsp;
         {activity.author}
       </Card.Text>
     </Card.Body>

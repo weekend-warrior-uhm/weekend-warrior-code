@@ -38,4 +38,5 @@ model Activity {
   time          String
   author        String
   author_email  String
+  duration      Float
 }

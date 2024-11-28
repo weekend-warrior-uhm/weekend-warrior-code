@@ -25,14 +25,14 @@ const NavBar: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
-            <Nav.Link id="add-stuff-nav" href="/activities" key="activities" active={pathName === '/activities'}>
+            <Nav.Link id="add-activities-nav" href="/activities" key="activities" active={pathName === '/activities'}>
               Activities
             </Nav.Link>
-            <Nav.Link id="list-stuff-nav" href="/users" key="users" active={pathName === '/users'}>
+            <Nav.Link id="list-activities-nav" href="/users" key="users" active={pathName === '/users'}>
               Users
             </Nav.Link>
             {currentUser && role === 'ADMIN' ? (
-              <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
+              <Nav.Link id="admin-nav" href="/admin" key="admin" active={pathName === '/admin'}>
                 Admin
               </Nav.Link>
             ) : (

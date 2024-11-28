@@ -5,8 +5,8 @@
   ],
 
   "defaultData": [
-    { "name": "Snorkeling at Hanauma Bay", "description": "Experience vibrant marine life and coral reefs at this nature preserve.", "location": "Hanauma Bay, Honolulu, HI", "date": "2024-11-26", "time": "9:30 AM", "author": "Jane Smith", "author_email": "jane@foo.com" },
-    { "name": "Luau at Paradise Cove", "description": "Enjoy a traditional Hawaiian luau with food, music, and hula performances.", "location": "Paradise Cove, Kapolei, HI", "date": "2024-11-30", "time": "6:00 PM", "author": "Aloha Events", "author_email": "alohaevents@foo.com" },
-    { "name": "Hiking at Diamond Head Crater", "description": "A scenic hike up Diamond Head with stunning views of Waikiki and the Pacific Ocean.", "location": "Diamond Head State Monument, Honolulu, HI", "date": "2024-11-25", "time": "7:00 AM", "author": "John Doe", "author_email": "john@foo.com" }
+    { "name": "Snorkeling at Hanauma Bay", "description": "Experience vibrant marine life and coral reefs at this nature preserve.", "location": "Hanauma Bay, Honolulu, HI", "date": "2024-11-26", "time": "9:30 AM", "author": "Jane Smith", "author_email": "jane@foo.com", "duration": 3.0 },
+    { "name": "Luau at Paradise Cove", "description": "Enjoy a traditional Hawaiian luau with food, music, and hula performances.", "location": "Paradise Cove, Kapolei, HI", "date": "2024-11-30", "time": "6:00 PM", "author": "Aloha Events", "author_email": "alohaevents@foo.com", "duration": 2.0 },
+    { "name": "Hiking at Diamond Head Crater", "description": "A scenic hike up Diamond Head with stunning views of Waikiki and the Pacific Ocean.", "location": "Diamond Head State Monument, Honolulu, HI", "date": "2024-12-01", "time": "7:00 AM", "author": "John Doe", "author_email": "john@foo.com", "duration": 4.0 }
   ]
 }
