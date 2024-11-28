@@ -1,12 +1,25 @@
-// import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
 // import { loggedInProtectedPage } from '@/lib/page-protection';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { Activity } from '@prisma/client';
+import authOptions from '@/lib/authOptions';
+import { Activity, User } from '@prisma/client';
 import AddActivity from '@/components/AddActivity';
 
 const ActivitiesPage = async () => {
+  const session = await getServerSession(authOptions);
+  const currentUser = session?.user?.email;
+
+  // Find the right user
+  const user: User | null = await prisma.user.findUnique({
+    where: {
+      email: currentUser ?? '',
+    },
+  });
+
+  console.log(user?.role);
+
+  // console.log(currentUser);
   /* This is for protecting the page so that only signed in users can access:
 
   const session = await getServerSession(authOptions);
@@ -29,6 +42,10 @@ const ActivitiesPage = async () => {
                 <Col key={activity.name}>
                   <AddActivity
                     activity={activity}
+                    owner={activity.author_email}
+                    currentUserEmail={user?.email}
+                    isRegistered={activity.registered.includes(user?.email ?? '')}
+                    currentUserRole={user?.role ?? ''}
                   />
                 </Col>
               ))}

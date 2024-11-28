@@ -9,8 +9,8 @@ export const EditActivitySchema = Yup.object({
   time: Yup.string().required(),
   author: Yup.string().required(),
   author_email: Yup.string().required(),
-  duration: Yup.number().required(),
-  registered: Yup.array().of(Yup.string()).required(),
+  duration: Yup.number().positive().required(),
+  registered: Yup.array().required(),
 });
 
 export const test = Yup.object({
