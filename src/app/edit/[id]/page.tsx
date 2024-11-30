@@ -15,10 +15,14 @@ export default async function EditActivityPage({ params }: { params: { id: strin
       // eslint-disable-next-line @typescript-eslint/comma-dangle
     } | null,
   );
+  const currentUser = session?.user?.email;
   const id = Number(Array.isArray(params?.id) ? params?.id[0] : params?.id);
   // console.log(id);
   const activity: Activity | null = await prisma.activity.findUnique({
-    where: { id },
+    where: {
+      id,
+      author_email: currentUser ?? '',
+    },
   });
   // console.log(activity);
   if (!activity) {

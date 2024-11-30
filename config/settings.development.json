@@ -1,7 +1,8 @@
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme" },
+    { "email": "jane@foo.com", "password": "changeme"}
   ],
 
   "defaultData": [
@@ -33,8 +34,8 @@
       "location": "Diamond Head State Monument, Honolulu, HI",
       "date": "2024-12-01",
       "time": "7:00 AM",
-      "author": "Admin",
-      "author_email": "admin@foo.com",
+      "author": "John Doe",
+      "author_email": "john@foo.com",
       "duration": 4.0,
       "registered": [
         "john@foo.com"
@@ -59,8 +60,8 @@
       "location": "Waikiki Beach, Honolulu, HI",
       "date": "2024-12-10",
       "time": "5:30 PM",
-      "author": "Admin",
-      "author_email": "admin@foo.com",
+      "author": "John Doe",
+      "author_email": "john@foo.com",
       "duration": 3.0,
       "registered": [
         "john@foo.com"
@@ -72,8 +73,8 @@
       "location": "North Shore, Oahu, HI",
       "date": "2024-12-15",
       "time": "10:00 AM",
-      "author": "Admin",
-      "author_email": "admin@foo.com",
+      "author": "Jane Doe",
+      "author_email": "jane@foo.com",
       "duration": 4.0,
       "registered": [
         "john@foo.com"
