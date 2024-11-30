@@ -29,6 +29,17 @@ export async function editActivity(data: Activity) {
   redirect('/activities');
 }
 
+export async function registerUpdate(act_id: number, newarr: string[]) {
+  await prisma.activity.update({
+    where: { id: act_id },
+    data: {
+      registered: newarr,
+    },
+  });
+
+  redirect('/activities');
+}
+
 /**
  * Deletes an existing activity from the database.
  * @param id, the id of the activity to delete.
