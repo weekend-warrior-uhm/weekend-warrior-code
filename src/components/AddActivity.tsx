@@ -44,7 +44,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
       activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
       registerUpdate(activity.id, activity.registered);
 
-      swal('Success', 'You have registered for this activity', 'success', {
+      swal('Success', 'You have unregistered for this activity', 'success', {
         timer: 2000,
       });
     }
