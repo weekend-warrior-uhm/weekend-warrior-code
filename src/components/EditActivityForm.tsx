@@ -105,26 +105,20 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                   />
                   <div className="invalid-feedback">{errors.duration?.message}</div>
                 </Form.Group>
-                <input type="hidden" {...register('author')} value={activity.author} />
-                <input type="hidden" {...register('author_email')} value={activity.author_email} />
-<<<<<<< HEAD
-                <input type="hidden" {...register('registered')} value={activity.registered} />
-=======
-<<<<<<< Updated upstream
-=======
                 <Form.Group>
-                  <Form.Label>Registered List</Form.Label>
-                  {activity.registered.map((registered, index) => (
+                  <Form.Label>Registered Users List</Form.Label>
+                  {activity.registered.map((tag, index) => (
                     <input
+                      key={1}
                       type="text"
                       {...register(`registered.${index}`)}
-                      defaultValue={registered}
+                      defaultValue={tag}
                       className="form-control mb-2"
                     />
                   ))}
                 </Form.Group>
->>>>>>> Stashed changes
->>>>>>> issue-3-edit-activity-info
+                <input type="hidden" {...register('author')} value={activity.author} />
+                <input type="hidden" {...register('author_email')} value={activity.author_email} />
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
