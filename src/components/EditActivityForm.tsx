@@ -107,6 +107,8 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                 </Form.Group>
                 <input type="hidden" {...register('author')} value={activity.author} />
                 <input type="hidden" {...register('author_email')} value={activity.author_email} />
+<<<<<<< Updated upstream
+=======
                 <Form.Group>
                   <Form.Label>Registered List</Form.Label>
                   {activity.registered.map((registered, index) => (
@@ -118,6 +120,7 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                     />
                   ))}
                 </Form.Group>
+>>>>>>> Stashed changes
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
