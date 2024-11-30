@@ -16,9 +16,15 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
 }) => {
   const handleSignUp = () => {
     console.log('Signing up for activity:', activity.name);
-    if ((currentUserEmail !== null) // checks
-      && (currentUserEmail !== undefined)
-      && (!activity.registered.includes(currentUserEmail))) {
+    if ((currentUserEmail !== null) || (currentUserEmail !== undefined)) {
+      swal('Error', 'You need to sign in to register for an activity', 'error', {
+        timer: 2000,
+      });
+    } else if (!activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
+      swal('Error', 'You are already registered for this activity', 'error', {
+        timer: 2000,
+      });
+    } else {
       activity.registered.push(currentUserEmail);
       registerUpdate(activity.id, activity.registered);
 
@@ -30,13 +36,15 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
 
   const handleUnregister = () => {
     console.log('Unregistering from activity:', activity.name);
-    if ((currentUserEmail !== null) // checks
-      && (currentUserEmail !== undefined)
-      && (activity.registered.includes(currentUserEmail))) {
+    if ((currentUserEmail !== null) || (currentUserEmail !== undefined)) { // Not sure when this would be triggered
+      swal('Error', 'You need to sign in to unregister for an activity', 'error', {
+        timer: 2000,
+      });
+    } else if (activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
       activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
       registerUpdate(activity.id, activity.registered);
 
-      swal('Success', 'You have unregistered for this activity', 'success', {
+      swal('Success', 'You have registered for this activity', 'success', {
         timer: 2000,
       });
     }
