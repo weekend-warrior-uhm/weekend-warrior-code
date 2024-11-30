@@ -107,7 +107,24 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                 </Form.Group>
                 <input type="hidden" {...register('author')} value={activity.author} />
                 <input type="hidden" {...register('author_email')} value={activity.author_email} />
+<<<<<<< HEAD
                 <input type="hidden" {...register('registered')} value={activity.registered} />
+=======
+<<<<<<< Updated upstream
+=======
+                <Form.Group>
+                  <Form.Label>Registered List</Form.Label>
+                  {activity.registered.map((registered, index) => (
+                    <input
+                      type="text"
+                      {...register(`registered.${index}`)}
+                      defaultValue={registered}
+                      className="form-control mb-2"
+                    />
+                  ))}
+                </Form.Group>
+>>>>>>> Stashed changes
+>>>>>>> issue-3-edit-activity-info
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
