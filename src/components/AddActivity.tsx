@@ -16,11 +16,11 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
 }) => {
   const handleSignUp = () => {
     console.log('Signing up for activity:', activity.name);
-    if ((currentUserEmail !== null) || (currentUserEmail !== undefined)) {
+    if ((currentUserEmail == null) || (currentUserEmail === undefined)) {
       swal('Error', 'You need to sign in to register for an activity', 'error', {
         timer: 2000,
       });
-    } else if (!activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
+    } else if (activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
       swal('Error', 'You are already registered for this activity', 'error', {
         timer: 2000,
       });
@@ -36,11 +36,11 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
 
   const handleUnregister = () => {
     console.log('Unregistering from activity:', activity.name);
-    if ((currentUserEmail !== null) || (currentUserEmail !== undefined)) { // Not sure when this would be triggered
+    if ((currentUserEmail == null) || (currentUserEmail === undefined)) { // Not sure when this would be triggered
       swal('Error', 'You need to sign in to unregister for an activity', 'error', {
         timer: 2000,
       });
-    } else if (activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
+    } else if (activity.registered.includes(currentUserEmail)) {
       activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
       registerUpdate(activity.id, activity.registered);
 
