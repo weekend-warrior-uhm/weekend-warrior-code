@@ -4,9 +4,20 @@ import * as config from '../config/settings.development.json';
 
 const prisma = new PrismaClient();
 
+type Account = {
+  email: string;
+  username: string;
+  password: string;
+  fullName: string;
+  phone: string;
+  gender: string;
+  interests: string[];
+  role?: string;
+};
+
 async function main() {
   console.log('Seeding the database');
-  const tasks = config.defaultAccounts.map(async (account) => {
+  const tasks = (config.defaultAccounts as Account[]).map(async (account) => {
     const hashedPassword = await hash(account.password, 10);
     let role: Role = 'USER';
     if (account.role === 'ADMIN') {
