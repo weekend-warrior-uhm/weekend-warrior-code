@@ -8,14 +8,14 @@ const SignIn = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
-      emailOrUsername: { value: string };
+      email: { value: string };
       password: { value: string };
     };
-    const emailOrUsername = target.emailOrUsername.value;
+    const email = target.email.value;
     const password = target.password.value;
     const result = await signIn('credentials', {
       callbackUrl: '/',
-      emailOrUsername,
+      email,
       password,
     });
 
@@ -33,9 +33,9 @@ const SignIn = () => {
             <Card>
               <Card.Body>
                 <Form method="post" onSubmit={handleSubmit}>
-                  <Form.Group controlId="formBasicEmailOrUsername">
-                    <Form.Label>Email or Username</Form.Label>
-                    <input name="emailOrUsername" type="text" className="form-control" />
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <input name="email" type="text" className="form-control" />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Password</Form.Label>
