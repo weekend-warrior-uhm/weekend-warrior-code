@@ -25,7 +25,7 @@ type SignUpForm = {
   gender?: string;
 };
 
-/** The sign up page. */
+/** The sign up page */
 const SignUp = () => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
