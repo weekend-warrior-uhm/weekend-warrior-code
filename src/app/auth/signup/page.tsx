@@ -155,7 +155,8 @@ const SignUp = () => {
                 </Form>
               </Card.Body>
               <Card.Footer>
-                Already have an account? <a href="/auth/signin">Sign in</a>
+                Already have an account?
+                <a href="/auth/signin">Sign in</a>
               </Card.Footer>
             </Card>
           </Col>
