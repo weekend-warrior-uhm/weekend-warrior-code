@@ -2,7 +2,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
 // import { loggedInProtectedPage } from '@/lib/page-protection';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';.
+// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { User } from '@prisma/client';
 import AddUser from '@/components/AddUser';
 
@@ -27,9 +27,7 @@ const ListUsers = async () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {users.map((user) => (
                 <Col key={user.id}>
-                  <AddUser
-                    user={user}
-                  />
+                  <AddUser user={user} />
                 </Col>
               ))}
             </Row>
