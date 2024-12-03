@@ -14,7 +14,7 @@ type SignUpForm = {
   // acceptTerms: boolean;
 };
 
-/** The sign up page. */
+/** The sign up page */
 const SignUp = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email is invalid'),
