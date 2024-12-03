@@ -1,5 +1,11 @@
-import NextAuth from 'next-auth';
-import authOptions from '@/lib/authOptions';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma';
 
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const users = await prisma.user.findMany();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching users' });
+  }
+};
