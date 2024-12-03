@@ -25,7 +25,7 @@ type SignUpForm = {
   gender?: string;
 };
 
-/** The sign up page */
+/** The sign up page. */
 const SignUp = () => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -226,7 +226,7 @@ const SignUp = () => {
               </Card.Body>
               <Card.Footer>
                 Already have an account?
-                <a href="/auth/signin"> Sign in</a>
+                <a href="/auth/signin">Sign in</a>
               </Card.Footer>
             </Card>
           </Col>
