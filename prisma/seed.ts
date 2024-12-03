@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log('Seeding the database');
-  const password = await hash('changeme', 10);
-  config.defaultAccounts.forEach(async (account) => {
+  const tasks = config.defaultAccounts.map(async (account) => {
+    const hashedPassword = await hash(account.password, 10);
     let role: Role = 'USER';
     if (account.role === 'ADMIN') {
       role = 'ADMIN';
@@ -18,13 +18,20 @@ async function main() {
       update: {},
       create: {
         email: account.email,
-        password,
+        username: account.username,
+        password: hashedPassword,
+        fullName: account.fullName,
+        phone: account.phone,
+        gender: account.gender,
+        interests: account.interests,
         role,
       },
     });
-    // console.log(`  Created user: ${user.email} with role: ${user.role}`);
   });
-  config.defaultData.forEach(async (data, index) => {
+
+  await Promise.all(tasks);
+
+  const activityTasks = config.defaultData.map(async (data, index) => {
     console.log(`  Adding activity: ${data.name}`);
     await prisma.activity.upsert({
       where: { id: index + 1 },
@@ -42,7 +49,10 @@ async function main() {
       },
     });
   });
+
+  await Promise.all(activityTasks);
 }
+
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {
