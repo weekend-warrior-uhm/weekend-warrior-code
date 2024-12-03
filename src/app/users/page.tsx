@@ -1,10 +1,30 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { prisma } from '@/lib/prisma';
 import { User } from '@prisma/client';
 import AddUser from '@/components/AddUser';
+import axios from 'axios';
 
-const ListUsers = async () => {
-  const users: User[] = await prisma.user.findMany({});
+const ListUsers = () => {
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get<User[]>('/api/users');
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+
+    const intervalId = setInterval(fetchUsers, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <main>
