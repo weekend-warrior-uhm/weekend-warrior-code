@@ -34,8 +34,6 @@ model User {
   role      Role     @default(USER)
 }
 
-
-
 model Activity {
   id            Int      @id @default(autoincrement())
   name          String

@@ -1,8 +1,8 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN" },
-    { "email": "john@foo.com", "password": "changeme" },
-    { "email": "jane@foo.com", "password": "changeme"}
+    { "email": "admin@foo.com", "username": "admin", "password": "changeme", "fullName": "Admin User", "phone": "1234567890", "gender": "Male", "interests": ["Admin", "Management"], "role": "ADMIN" },
+    { "email": "john@foo.com", "username": "john_doe", "password": "changeme", "fullName": "John Doe", "phone": "2345678901", "gender": "Male", "interests": ["Snorkeling", "Hiking"] },
+    { "email": "jane@foo.com", "username": "jane_doe", "password": "changeme", "fullName": "Jane Doe", "phone": "3456789012", "gender": "Female", "interests": ["Hula", "Ziplining"] }
   ],
 
   "defaultData": [
@@ -81,5 +81,4 @@
       ]
     }
   ]
-  
 }
