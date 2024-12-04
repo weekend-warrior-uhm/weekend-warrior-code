@@ -3,6 +3,7 @@
 import { Card } from 'react-bootstrap';
 import { User } from '@prisma/client';
 
+/* Renders a single row in the List table. See list/page.tsx. */
 const AddUser = ({ user }: { user: User }) => (
   <Card className="h-100">
     <Card.Header>
