@@ -9,7 +9,7 @@ import AddActivity from '@/components/AddActivity';
 const ActivitiesPage = async () => {
   const session = await getServerSession(authOptions);
   const currentUser = session?.user?.email;
-  const today = new Date().toISOString().split('T')[0]; // The date in YYYY-MM-DD format
+  const today = new Date().toISOString().split('T')[0];
 
   // Find the right user
   const user: User | null = await prisma.user.findUnique({
@@ -33,7 +33,7 @@ const ActivitiesPage = async () => {
           <Col>
             <h2 className="text-center">Activities</h2>
             <div className="text-center my-3">
-              <Link href="/create-activity">
+              <Link href="/create">
                 <Button variant="primary">Create Activity</Button>
               </Link>
             </div>
