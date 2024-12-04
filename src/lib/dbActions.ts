@@ -17,6 +17,27 @@ interface Credentials {
 }
 
 /**
+ * Creates a new activity in the database.
+ * @param data - The activity data to create.
+ */
+export async function createActivity(data: Omit<Activity, 'id'>) {
+  await prisma.activity.create({
+    data: {
+      name: data.name,
+      description: data.description,
+      location: data.location,
+      date: data.date,
+      time: data.time,
+      author: data.author,
+      author_email: data.author_email,
+      duration: data.duration,
+      registered: data.registered,
+    },
+  });
+  redirect('/activities');
+}
+
+/**
  * Edits an existing activity in the database.
  * @param data - The activity data to update.
  */

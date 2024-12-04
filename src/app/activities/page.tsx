@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-// import { loggedInProtectedPage } from '@/lib/page-protection';
+import Link from 'next/link';
 import authOptions from '@/lib/authOptions';
 import { Activity, User } from '@prisma/client';
 import AddActivity from '@/components/AddActivity';
@@ -18,19 +18,7 @@ const ActivitiesPage = async () => {
     },
   });
 
-  console.log(user?.role);
-
-  // console.log(currentUser);
-  /* This is for protecting the page so that only signed in users can access:
-
-  const session = await getServerSession(authOptions);
-  loggedInProtectedPage(
-    session as {
-      user: { email: string; id: string; randomKey: string };
-    } | null,
-  );
-  */
-  const activities: Activity[] = await prisma.activity.findMany({ // Only looks for activities that aren't expired
+  const activities: Activity[] = await prisma.activity.findMany({
     where: {
       date: {
         gt: today,
@@ -44,11 +32,16 @@ const ActivitiesPage = async () => {
         <Row>
           <Col>
             <h2 className="text-center">Activities</h2>
+            <div className="text-center my-3">
+              <Link href="/create-activity">
+                <Button variant="primary">Create Activity</Button>
+              </Link>
+            </div>
             <Row xs={1} md={2} lg={3} className="g-4">
               {activities
-                .sort((a, b) => a.date.localeCompare(b.date)) // Sorts the array in place by comparing dates
+                .sort((a, b) => a.date.localeCompare(b.date))
                 .map((activity) => (
-                  <Col key={activity.name}>
+                  <Col key={activity.id}>
                     <AddActivity
                       activity={activity}
                       owner={activity.author_email}
