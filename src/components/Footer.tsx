@@ -9,7 +9,7 @@ const Footer = () => (
         <br />
         ICS 314 Final Project
         <br />
-        <a style={{ color: 'white' }} href="https://bowfolios.github.io">
+        <a style={{ color: 'white' }} href="https://weekend-warrior-uhm.github.io">
           https://weekend-warrior-uhm.github.io
         </a>
       </Col>
