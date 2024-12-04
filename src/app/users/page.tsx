@@ -1,12 +1,19 @@
-// import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-// import { loggedInProtectedPage } from '@/lib/page-protection';
-// import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { loggedInProtectedPage } from '@/lib/page-protection';
+import authOptions from '@/lib/authOptions';
 import { User } from '@prisma/client';
 import AddUser from '@/components/AddUser';
 
 const ListUsers = async () => {
+  const session = await getServerSession(authOptions);
+  loggedInProtectedPage(
+    session as {
+      user: { email: string; id: string; randomKey: string };
+    } | null,
+  );
+
   /* This is for protecting the page so that only signed in users can access:
 
   const session = await getServerSession(authOptions);
