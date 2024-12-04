@@ -10,7 +10,11 @@ import { editActivity } from '@/lib/dbActions';
 
 const onSubmit = async (data: Activity) => {
   // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
-  await editActivity(data);
+  const cleanedData = {
+    ...data,
+    registered: data.registered.filter((user) => user.trim() !== ''),
+  };
+  await editActivity(cleanedData);
   swal('Success', 'The activity has been updated', 'success', {
     timer: 2000,
   });
@@ -106,16 +110,39 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                   <div className="invalid-feedback">{errors.duration?.message}</div>
                 </Form.Group>
                 <Form.Group>
+                  {/* No one should be able to edit the list of registered users */}
                   <Form.Label>Registered Users List</Form.Label>
-                  {activity.registered.map((tag, index) => (
-                    <input
-                      key={1}
-                      type="text"
-                      {...register(`registered.${index}`)}
-                      defaultValue={tag}
-                      className="form-control mb-2"
-                    />
-                  ))}
+                  {activity.registered.length > 0 ? ( // If there are registered users, render /w the users
+                    activity.registered.map((tag, index) => (
+                      <div>
+                        <input
+                          type="text"
+                          disabled
+                          value={tag}
+                          className="form-control mb-2"
+                        />
+                        <input
+                          type="hidden"
+                          {...register(`registered.${index}`)}
+                          value={tag} // This one submits the registered users array w/o the changes
+                        />
+                      </div>
+                    ))
+                  ) : ( // If not, render as "No users registered"
+                    <div>
+                      <input
+                        type="text"
+                        disabled
+                        value="No users registered"
+                        className="form-control mb-2"
+                      />
+                      <input
+                        type="hidden"
+                        {...register('registered.0')}
+                        value="" // Both submit values, where the empty array submits a "" (handled by onSubmit)
+                      />
+                    </div>
+                  )}
                 </Form.Group>
                 <input type="hidden" {...register('author')} value={activity.author} />
                 <input type="hidden" {...register('author_email')} value={activity.author_email} />
