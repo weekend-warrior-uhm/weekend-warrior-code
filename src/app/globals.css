@@ -30,13 +30,6 @@ body {
   }
 }
 
-/* Responsive background image adjustments */
-@media (max-width: 768px) {
-  body {
-    background-size: contain; /* Adjust the background size to contain for smaller screens */
-  }
-}
-
 html, body {
   box-sizing: border-box;
   height: 100%;
@@ -87,4 +80,12 @@ html, body {
 .reset-margins {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+/* Add these styles to handle the dropdown menu on smaller screens */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    max-height: 300px; /* Adjust this value as needed */
+    overflow-y: auto;
+  }
 }

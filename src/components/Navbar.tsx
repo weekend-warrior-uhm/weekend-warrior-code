@@ -41,7 +41,7 @@ const NavBar: React.FC = () => {
           </Nav>
           <Nav className="justify-content-end">
             {session ? (
-              <NavDropdown id="login-dropdown" title={currentUser}>
+              <NavDropdown id="login-dropdown" title={currentUser} className="dropdown-menu-right">
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
                   <BoxArrowRight />
 {' '}
@@ -54,7 +54,7 @@ Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown id="login-dropdown" title="Login">
+              <NavDropdown id="login-dropdown" title="Login" className="dropdown-menu-right">
                 <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
                   <PersonFill />
 {' '}
