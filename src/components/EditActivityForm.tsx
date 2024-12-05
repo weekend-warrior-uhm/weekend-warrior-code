@@ -89,7 +89,7 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                 <Form.Group>
                   <Form.Label>Time</Form.Label>
                   <input
-                    type="text"
+                    type="time"
                     {...register('time')}
                     defaultValue={activity.time}
                     required
