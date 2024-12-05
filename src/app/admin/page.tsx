@@ -38,9 +38,11 @@ const AdminPage = async () => {
                 </tr>
               </thead>
               <tbody>
-                {activity.map((item) => (
-                  <ActivityItemAdmin key={item.id} {...item} />
-                ))}
+                {activity
+                  .sort((a, b) => a.date.localeCompare(b.date))
+                  .map((item) => (
+                    <ActivityItemAdmin key={item.id} {...item} />
+                  ))}
               </tbody>
             </Table>
           </Col>
