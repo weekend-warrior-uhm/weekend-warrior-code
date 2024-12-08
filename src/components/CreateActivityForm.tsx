@@ -4,50 +4,48 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Activity } from '@prisma/client';
-import { EditActivitySchema } from '@/lib/validationSchemas';
-import { editActivity } from '@/lib/dbActions';
+import { Prisma } from '@prisma/client';
+import { CreateActivitySchema } from '@/lib/validationSchemas';
+import { createActivity } from '@/lib/dbActions';
 
-const onSubmit = async (data: Activity) => {
-  // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
-  const cleanedData = {
-    ...data,
-    registered: data.registered.filter((user) => user.trim() !== ''),
-  };
-  await editActivity(cleanedData);
-  swal('Success', 'The activity has been updated', 'success', {
-    timer: 2000,
-  });
-};
+type ActivityInput = Prisma.ActivityCreateInput;
 
-const EditActivityForm = ({ activity }: { activity: Activity }) => {
+const CreateActivityForm = ({ currentUserName, currentUserEmail }:
+{ currentUserName: string, currentUserEmail: string }) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Activity>({
-    resolver: yupResolver(EditActivitySchema),
+  } = useForm<ActivityInput>({
+    resolver: yupResolver(CreateActivitySchema),
   });
-  // console.log(activity);
+
+  const onSubmit = async (data: ActivityInput) => {
+    await createActivity({
+      ...data,
+      registered: [],
+    });
+    swal('Success', 'The activity has been created', 'success', {
+      timer: 2000,
+    });
+  };
 
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
-            <h2>Edit Activity</h2>
+            <h2>Create Activity</h2>
           </Col>
           <Card>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <input type="hidden" {...register('id')} value={activity.id} />
                 <Form.Group>
                   <Form.Label>Name</Form.Label>
                   <input
                     type="text"
                     {...register('name')}
-                    defaultValue={activity.name}
                     required
                     className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                   />
@@ -58,9 +56,8 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                   <input
                     type="text"
                     {...register('description')}
-                    defaultValue={activity.description}
                     required
-                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                    className={`form-control ${errors.description ? 'is-invalid' : ''}`}
                   />
                   <div className="invalid-feedback">{errors.description?.message}</div>
                 </Form.Group>
@@ -69,7 +66,6 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                   <input
                     type="text"
                     {...register('location')}
-                    defaultValue={activity.location}
                     required
                     className={`form-control ${errors.location ? 'is-invalid' : ''}`}
                   />
@@ -78,9 +74,8 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                 <Form.Group>
                   <Form.Label>Date</Form.Label>
                   <input
-                    type="text"
+                    type="date"
                     {...register('date')}
-                    defaultValue={activity.date}
                     required
                     className={`form-control ${errors.date ? 'is-invalid' : ''}`}
                   />
@@ -91,7 +86,6 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                   <input
                     type="time"
                     {...register('time')}
-                    defaultValue={activity.time}
                     required
                     className={`form-control ${errors.time ? 'is-invalid' : ''}`}
                   />
@@ -103,49 +97,13 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                     type="number"
                     step="0.1"
                     {...register('duration')}
-                    defaultValue={activity.duration}
                     required
                     className={`form-control ${errors.duration ? 'is-invalid' : ''}`}
                   />
                   <div className="invalid-feedback">{errors.duration?.message}</div>
                 </Form.Group>
-                <Form.Group>
-                  {/* No one should be able to edit the list of registered users */}
-                  <Form.Label>Registered Users List</Form.Label>
-                  {activity.registered.length > 0 ? ( // If there are registered users, render /w the users
-                    activity.registered.map((tag, index) => (
-                      <div>
-                        <input
-                          type="text"
-                          disabled
-                          value={tag}
-                          className="form-control mb-2"
-                        />
-                        <input
-                          type="hidden"
-                          {...register(`registered.${index}`)}
-                          value={tag} // This one submits the registered users array w/o the changes
-                        />
-                      </div>
-                    ))
-                  ) : ( // If not, render as "No users registered"
-                    <div>
-                      <input
-                        type="text"
-                        disabled
-                        value="No users registered"
-                        className="form-control mb-2"
-                      />
-                      <input
-                        type="hidden"
-                        {...register('registered.0')}
-                        value="" // Both submit values, where the empty array submits a "" (handled by onSubmit)
-                      />
-                    </div>
-                  )}
-                </Form.Group>
-                <input type="hidden" {...register('author')} value={activity.author} />
-                <input type="hidden" {...register('author_email')} value={activity.author_email} />
+                <input type="hidden" {...register('author')} value={currentUserName} />
+                <input type="hidden" {...register('author_email')} value={currentUserEmail} />
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
@@ -169,4 +127,4 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
   );
 };
 
-export default EditActivityForm;
+export default CreateActivityForm;
