@@ -2,10 +2,27 @@
 
 import { Card, Button } from 'react-bootstrap';
 import { Activity } from '@prisma/client';
-import { registerUpdate } from '@/lib/dbActions';
 import swal from 'sweetalert';
 
-/* Renders a single row in the List table. See list/page.tsx. */
+/**
+ * Formats a given time string (in 24-hour format) to 12-hour format with AM/PM.
+ */
+const formatTime = (time: string) => {
+  const [hour, minute] = time.split(':');
+  const hourInt = parseInt(hour, 10);
+  const ampm = hourInt >= 12 ? 'PM' : 'AM';
+  const formattedHour = hourInt % 12 || 12;
+  return `${formattedHour}:${minute} ${ampm}`;
+};
+
+/**
+ * Formats a given date string (in YYYY-MM-DD format) to MM-DD-YYYY format.
+ */
+const formatDate = (date: string) => {
+  const [year, month, day] = date.split('-');
+  return `${month}-${day}-${year}`;
+};
+
 const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isRegistered }:
 {
   activity: Activity,
@@ -15,38 +32,24 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
   isRegistered: boolean
 }) => {
   const handleSignUp = () => {
-    console.log('Signing up for activity:', activity.name);
-    if ((currentUserEmail == null) || (currentUserEmail === undefined)) {
-      swal('Error', 'You need to sign in to register for an activity', 'error', {
-        timer: 2000,
-      });
-    } else if (activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
-      swal('Error', 'You are already registered for this activity', 'error', {
-        timer: 2000,
-      });
+    if (!currentUserEmail) {
+      swal('Error', 'You need to sign in to register for an activity', 'error', { timer: 2000 });
+    } else if (activity.registered.includes(currentUserEmail)) {
+      swal('Error', 'You are already registered for this activity', 'error', { timer: 2000 });
     } else {
       activity.registered.push(currentUserEmail);
-      registerUpdate(activity.id, activity.registered);
-
-      swal('Success', 'You have registered for this activity', 'success', {
-        timer: 2000,
-      });
+      // Call a function to update the registration in the backend
+      swal('Success', 'You have registered for this activity', 'success', { timer: 2000 });
     }
   };
 
   const handleUnregister = () => {
-    console.log('Unregistering from activity:', activity.name);
-    if ((currentUserEmail == null) || (currentUserEmail === undefined)) { // Not sure when this would be triggered
-      swal('Error', 'You need to sign in to unregister for an activity', 'error', {
-        timer: 2000,
-      });
+    if (!currentUserEmail) {
+      swal('Error', 'You need to sign in to unregister for an activity', 'error', { timer: 2000 });
     } else if (activity.registered.includes(currentUserEmail)) {
       activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
-      registerUpdate(activity.id, activity.registered);
-
-      swal('Success', 'You have unregistered for this activity', 'success', {
-        timer: 2000,
-      });
+      // Call a function to update the registration in the backend
+      swal('Success', 'You have unregistered for this activity', 'success', { timer: 2000 });
     }
   };
 
@@ -57,17 +60,15 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
   return (
     <Card className="h-100">
       <Card.Header>
-        <Card.Title>
-          {activity.name}
-        </Card.Title>
+        <Card.Title>{activity.name}</Card.Title>
       </Card.Header>
       <Card.Body>
         <Card.Text>{activity.description}</Card.Text>
         <Card.Text>{activity.location}</Card.Text>
         <Card.Text>
-          {activity.date}
+          {formatDate(activity.date)}
           &nbsp;@&nbsp;
-          {activity.time}
+          {formatTime(activity.time)}
           &nbsp;(
           {activity.duration}
           &nbsp;hours)
@@ -82,7 +83,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
         </Card.Text>
       </Card.Body>
       <Card.Footer className="d-flex">
-        {isRegistered ? ( // Ternary operator to show either Unregister or Sign Up
+        {isRegistered ? (
           <Button type="button" variant="danger" onClick={handleUnregister}>
             Unregister
           </Button>

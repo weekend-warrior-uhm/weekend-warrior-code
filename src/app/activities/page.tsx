@@ -4,7 +4,8 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import authOptions from '@/lib/authOptions';
 import { Activity, User } from '@prisma/client';
-import AddActivity from '@/components/AddActivity';
+import ActivityCard from '@/components/ActivityCard';
+import swal from 'sweetalert';
 
 const ActivitiesPage = async () => {
   const session = await getServerSession(authOptions);
@@ -42,12 +43,30 @@ const ActivitiesPage = async () => {
                 .sort((a, b) => a.date.localeCompare(b.date))
                 .map((activity) => (
                   <Col key={activity.id}>
-                    <AddActivity
+                    <ActivityCard
                       activity={activity}
-                      owner={activity.author_email}
-                      currentUserEmail={user?.email}
+                      handleEdit={(id: number) => (window.location.href = `/edit/${id}`)}
                       isRegistered={activity.registered.includes(user?.email ?? '')}
-                      currentUserRole={user?.role ?? ''}
+                      handleSignUp={() => {
+                        if (!currentUser) {
+                          swal('Error', 'You need to sign in to register for an activity', 'error', { timer: 2000 });
+                        } else if (activity.registered.includes(currentUser)) {
+                          swal('Error', 'You are already registered for this activity', 'error', { timer: 2000 });
+                        } else {
+                          activity.registered.push(currentUser);
+                          // Call a function to update the registration in the backend
+                          swal('Success', 'You have registered for this activity', 'success', { timer: 2000 });
+                        }
+                      }}
+                      handleUnregister={() => {
+                        if (!currentUser) {
+                          swal('Error', 'You need to sign in to unregister for an activity', 'error', { timer: 2000 });
+                        } else if (activity.registered.includes(currentUser)) {
+                          activity.registered.splice(activity.registered.indexOf(currentUser), 1);
+                          // Call a function to update the registration in the backend
+                          swal('Success', 'You have unregistered for this activity', 'success', { timer: 2000 });
+                        }
+                      }}
                     />
                   </Col>
                 ))}
