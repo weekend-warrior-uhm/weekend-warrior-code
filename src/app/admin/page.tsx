@@ -33,6 +33,7 @@ const AdminPage = async () => {
                   <th>Owner</th>
                   <th>Owner&apos;s Email</th>
                   <th>Duration</th>
+                  <th>Registered Users</th>
                   <th>Edit</th>
                 </tr>
               </thead>
