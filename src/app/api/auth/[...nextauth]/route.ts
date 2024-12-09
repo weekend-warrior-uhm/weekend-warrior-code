@@ -3,6 +3,9 @@ import authOptions from '@/lib/authOptions';
 import { prisma } from '@/lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+// NextAuth Handler
+const authHandler = NextAuth(authOptions);
+
 // Utility function to get activity by ID
 async function getActivityById(id: number) {
   return prisma.activity.findUnique({
@@ -10,19 +13,12 @@ async function getActivityById(id: number) {
   });
 }
 
-// NextAuth Handler
-const authHandler = NextAuth(authOptions);
-
+// Main API Route Handler
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
   const { email } = req.body;
 
-  if (req.url?.startsWith('/api/auth')) {
-    // Delegate to NextAuth handler for authentication-related routes
-    return authHandler(req, res);
-  }
-
-  if (req.url?.startsWith('/api/activity')) {
+  if (req.url?.includes('/api/activity')) {
     switch (req.method) {
       case 'GET':
         try {
@@ -56,9 +52,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: { registered: updatedRegistered },
               });
               return res.status(200).json(updatedActivity);
-            } else {
-              return res.status(404).json({ error: 'Activity not found or no users registered' });
             }
+            return res.status(404).json({ error: 'Activity not found or no users registered' });
           } catch (error) {
             return res.status(500).json({ error: 'Failed to unregister from activity' });
           }
@@ -69,8 +64,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       default:
         return res.setHeader('Allow', ['GET', 'POST']).status(405).end(`Method ${req.method} Not Allowed`);
     }
+  } else {
+    // Delegate to NextAuth handler for authentication-related routes
+    return authHandler(req, res);
   }
-
-  // Return 404 for any other routes not handled
-  return res.status(404).end('Not Found');
 }
