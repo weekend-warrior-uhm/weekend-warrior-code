@@ -24,10 +24,8 @@ const formatDate = (date: string) => {
   return `${month}-${day}-${year}`;
 };
 
-const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole }:
-{
+const AddActivity = ({ activity, currentUserEmail, currentUserRole }: {
   activity: Activity,
-  owner: string,
   currentUserEmail: string | null | undefined,
   currentUserRole: string,
 }) => {
@@ -39,11 +37,15 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole }:
     } else if (isRegistered) {
       swal('Error', 'You are already registered for this activity', 'error', { timer: 2000 });
     } else {
-      // eslint-disable-next-line no-param-reassign
-      activity.registered.push(currentUserEmail);
-      // Make a request to update the registration in the backend
-      // After successfully updating in the backend
+      const updatedRegistered = [...activity.registered, currentUserEmail];
       setIsRegistered(true);
+      await fetch('/api/registerUpdate', {
+        method: 'POST',
+        body: JSON.stringify({ id: activity.id, registered: updatedRegistered }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       swal('Success', 'You have registered for this activity', 'success', { timer: 2000 });
     }
   };
@@ -52,11 +54,15 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole }:
     if (!currentUserEmail) {
       swal('Error', 'You need to sign in to unregister for an activity', 'error', { timer: 2000 });
     } else if (isRegistered) {
-      // eslint-disable-next-line no-param-reassign
-      activity.registered = activity.registered.filter(email => email !== currentUserEmail);
-      // Make a request to update the unregistration in the backend
-      // After successfully updating in the backend
+      const updatedRegistered = activity.registered.filter(email => email !== currentUserEmail);
       setIsRegistered(false);
+      await fetch('/api/registerUpdate', {
+        method: 'POST',
+        body: JSON.stringify({ id: activity.id, registered: updatedRegistered }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       swal('Success', 'You have unregistered for this activity', 'success', { timer: 2000 });
     }
   };
@@ -100,7 +106,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole }:
             Sign Up
           </Button>
         )}
-        {((owner === currentUserEmail) || (currentUserRole === 'ADMIN')) && (
+        {((activity.author_email === currentUserEmail) || (currentUserRole === 'ADMIN')) && (
           <Button type="button" variant="danger" className="ms-auto" onClick={() => handleEdit(activity.id)}>
             Edit
           </Button>
