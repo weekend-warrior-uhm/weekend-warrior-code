@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Activity } from '@prisma/client';
 import swal from 'sweetalert';
@@ -23,32 +24,39 @@ const formatDate = (date: string) => {
   return `${month}-${day}-${year}`;
 };
 
-const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isRegistered }:
+const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole }:
 {
   activity: Activity,
   owner: string,
   currentUserEmail: string | null | undefined,
   currentUserRole: string,
-  isRegistered: boolean
 }) => {
-  const handleSignUp = () => {
+  const [isRegistered, setIsRegistered] = useState(activity.registered.includes(currentUserEmail ?? ''));
+
+  const handleSignUp = async () => {
     if (!currentUserEmail) {
       swal('Error', 'You need to sign in to register for an activity', 'error', { timer: 2000 });
-    } else if (activity.registered.includes(currentUserEmail)) {
+    } else if (isRegistered) {
       swal('Error', 'You are already registered for this activity', 'error', { timer: 2000 });
     } else {
+      // eslint-disable-next-line no-param-reassign
       activity.registered.push(currentUserEmail);
-      // Call a function to update the registration in the backend
+      // Make a request to update the registration in the backend
+      // After successfully updating in the backend
+      setIsRegistered(true);
       swal('Success', 'You have registered for this activity', 'success', { timer: 2000 });
     }
   };
 
-  const handleUnregister = () => {
+  const handleUnregister = async () => {
     if (!currentUserEmail) {
       swal('Error', 'You need to sign in to unregister for an activity', 'error', { timer: 2000 });
-    } else if (activity.registered.includes(currentUserEmail)) {
-      activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
-      // Call a function to update the registration in the backend
+    } else if (isRegistered) {
+      // eslint-disable-next-line no-param-reassign
+      activity.registered = activity.registered.filter(email => email !== currentUserEmail);
+      // Make a request to update the unregistration in the backend
+      // After successfully updating in the backend
+      setIsRegistered(false);
       swal('Success', 'You have unregistered for this activity', 'success', { timer: 2000 });
     }
   };
