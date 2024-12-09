@@ -10,8 +10,7 @@ const ActivitiesPage = async () => {
   const session = await getServerSession(authOptions);
   const currentUser = session?.user?.email;
   const today = new Date().toISOString().split('T')[0];
-  // comment to redeploy
-  // Find the right user
+
   const user: User | null = await prisma.user.findUnique({
     where: { email: currentUser ?? '' },
   });
