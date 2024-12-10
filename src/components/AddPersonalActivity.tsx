@@ -1,8 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Activity } from '@prisma/client';
-import { registerUpdate } from '@/lib/dbActions';
 import swal from 'sweetalert';
 
 /**
@@ -24,48 +24,46 @@ const formatDate = (date: string) => {
   return `${month}-${day}-${year}`;
 };
 
-/* Renders a single row in the List table. See list/page.tsx. */
-const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isRegistered }:
-{
+const AddActivity = ({ activity, currentUserEmail, currentUserRole }: {
   activity: Activity,
-  owner: string,
   currentUserEmail: string | null | undefined,
   currentUserRole: string,
-  isRegistered: boolean
 }) => {
-  const handleSignUp = () => {
-    console.log('Signing up for activity:', activity.name);
-    if ((currentUserEmail == null) || (currentUserEmail === undefined)) {
-      swal('Error', 'You need to sign in to register for an activity', 'error', {
-        timer: 2000,
-      });
-    } else if (activity.registered.includes(currentUserEmail)) { // Not sure when this would be triggered
-      swal('Error', 'You are already registered for this activity', 'error', {
-        timer: 2000,
-      });
-    } else {
-      activity.registered.push(currentUserEmail);
-      registerUpdate(activity.id, activity.registered);
+  const [isRegistered, setIsRegistered] = useState(activity.registered.includes(currentUserEmail ?? ''));
 
-      swal('Success', 'You have registered for this activity', 'success', {
-        timer: 2000,
+  const handleSignUp = async () => {
+    if (!currentUserEmail) {
+      swal('Error', 'You need to sign in to register for an activity', 'error', { timer: 2000 });
+    } else if (isRegistered) {
+      swal('Error', 'You are already registered for this activity', 'error', { timer: 2000 });
+    } else {
+      const updatedRegistered = [...activity.registered, currentUserEmail];
+      setIsRegistered(true);
+      await fetch('/api/registerUpdate', {
+        method: 'POST',
+        body: JSON.stringify({ id: activity.id, registered: updatedRegistered }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+      swal('Success', 'You have registered for this activity', 'success', { timer: 2000 });
     }
   };
 
-  const handleUnregister = () => {
-    console.log('Unregistering from activity:', activity.name);
-    if ((currentUserEmail == null) || (currentUserEmail === undefined)) { // Not sure when this would be triggered
-      swal('Error', 'You need to sign in to unregister for an activity', 'error', {
-        timer: 2000,
+  const handleUnregister = async () => {
+    if (!currentUserEmail) {
+      swal('Error', 'You need to sign in to unregister for an activity', 'error', { timer: 2000 });
+    } else if (isRegistered) {
+      const updatedRegistered = activity.registered.filter(email => email !== currentUserEmail);
+      setIsRegistered(false);
+      await fetch('/api/registerUpdate', {
+        method: 'POST',
+        body: JSON.stringify({ id: activity.id, registered: updatedRegistered }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-    } else if (activity.registered.includes(currentUserEmail)) {
-      activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
-      registerUpdate(activity.id, activity.registered);
-
-      swal('Success', 'You have registered for this activity', 'success', {
-        timer: 2000,
-      });
+      swal('Success', 'You have unregistered for this activity', 'success', { timer: 2000 });
     }
   };
 
@@ -76,9 +74,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
   return (
     <Card className="h-100">
       <Card.Header>
-        <Card.Title>
-          {activity.name}
-        </Card.Title>
+        <Card.Title>{activity.name}</Card.Title>
       </Card.Header>
       <Card.Body>
         <Card.Text>{activity.description}</Card.Text>
@@ -101,7 +97,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
         </Card.Text>
       </Card.Body>
       <Card.Footer className="d-flex">
-        {isRegistered ? ( // Ternary operator to show either Unregister or Sign Up
+        {isRegistered ? (
           <Button type="button" variant="danger" onClick={handleUnregister}>
             Unregister
           </Button>
@@ -110,7 +106,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
             Sign Up
           </Button>
         )}
-        {((owner === currentUserEmail) || (currentUserRole === 'ADMIN')) && (
+        {((activity.author_email === currentUserEmail) || (currentUserRole === 'ADMIN')) && (
           <Button type="button" variant="danger" className="ms-auto" onClick={() => handleEdit(activity.id)}>
             Edit
           </Button>
