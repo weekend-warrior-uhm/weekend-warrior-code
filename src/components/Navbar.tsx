@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-indent, @typescript-eslint/indent */
-
 'use client';
 
 import { useSession } from 'next-auth/react';
@@ -17,7 +15,7 @@ const NavBar: React.FC = () => {
   const navbarClassName = currentUser ? 'bg-dark' : 'bg-light';
 
   return (
-    <Navbar expand="lg" style={menuStyle} className={navbarClassName}>
+    <Navbar expand="lg" style={menuStyle} className={`sticky-navbar ${navbarClassName}`}>
       <Container>
         <Navbar.Brand href="/" className="align-items-center">
           <span style={{ fontWeight: 800, fontSize: '24px' }}>Weekend Warrior</span>
@@ -47,26 +45,26 @@ const NavBar: React.FC = () => {
               <NavDropdown id="login-dropdown" title={currentUser}>
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
                   <BoxArrowRight />
-{' '}
-Sign Out
+                  {' '}
+                  Sign Out
                 </NavDropdown.Item>
                 <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
                   <Lock />
-{' '}
-Change Password
+                  {' '}
+                  Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <NavDropdown id="login-dropdown" title="Login">
                 <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
                   <PersonFill />
-{' '}
-Sign in
+                  {' '}
+                  Sign in
                 </NavDropdown.Item>
                 <NavDropdown.Item id="login-dropdown-sign-up" href="/auth/signup">
                   <PersonPlusFill />
-{' '}
-Sign up
+                  {' '}
+                  Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             )}
