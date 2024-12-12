@@ -43,6 +43,7 @@ const ActivitiesPage = async () => {
                       currentUserEmail={user?.email}
                       isRegistered={activity.registered.includes(user?.email ?? '')}
                       currentUserRole={user?.role ?? ''}
+                      kind="main"
                     />
                   </Col>
                 ))}

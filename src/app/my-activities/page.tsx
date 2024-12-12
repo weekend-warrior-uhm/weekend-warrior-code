@@ -5,11 +5,17 @@ import { prisma } from '@/lib/prisma';
 import authOptions from '@/lib/authOptions';
 import { Activity, User } from '@prisma/client';
 import AddActivity from '@/components/AddActivity';
+import { loggedInProtectedPage } from '@/lib/page-protection';
 
 const MyActivitiesPage = async () => {
   const session = await getServerSession(authOptions);
-  const currentUser = session?.user?.email;
+  loggedInProtectedPage(
+    session as {
+      user: { email: string; id: string; randomKey: string };
+    } | null,
+  );
 
+  const currentUser = session?.user?.email;
   const user: User | null = await prisma.user.findUnique({
     where: { email: currentUser ?? '' },
   });
@@ -39,6 +45,7 @@ const MyActivitiesPage = async () => {
                       currentUserEmail={user?.email}
                       isRegistered={activity.registered.includes(user?.email ?? '')}
                       currentUserRole={user?.role ?? ''}
+                      kind="my"
                     />
                   </Col>
                 ))}

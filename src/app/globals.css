@@ -30,13 +30,6 @@ body {
   }
 }
 
-/* Responsive background image adjustments */
-@media (max-width: 768px) {
-  body {
-    background-size: contain; /* Adjust the background size to contain for smaller screens */
-  }
-}
-
 html, body {
   box-sizing: border-box;
   height: 100%;
@@ -53,7 +46,7 @@ html, body {
 
 /* Color the light Brand and links with dark color */
 .bg-light span, .bg-light a {
-  color:  var(--bowfolio-navbar-bg);
+  color: var(--bowfolio-navbar-bg);
 }
 
 /* When logged in we switch the NavBar to bg-dark so we need to override the styles to give light text. */
@@ -87,4 +80,16 @@ html, body {
 .reset-margins {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+/* Ensure the Navbar is sticky */
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure the navbar stays on top */
+}
+
+/* Ensure the footer stays at the bottom */
+footer {
+  margin-top: auto;
 }

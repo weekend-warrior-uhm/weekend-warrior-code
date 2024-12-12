@@ -59,7 +59,7 @@ export async function editActivity(data: Activity) {
   redirect('/activities');
 }
 
-export async function registerUpdate(act_id: number, newarr: string[]) {
+export async function registerUpdateMain(act_id: number, newarr: string[]) {
   await prisma.activity.update({
     where: { id: act_id },
     data: {
@@ -67,6 +67,16 @@ export async function registerUpdate(act_id: number, newarr: string[]) {
     },
   });
   redirect('/activities');
+}
+
+export async function registerUpdateMy(act_id: number, newarr: string[]) {
+  await prisma.activity.update({
+    where: { id: act_id },
+    data: {
+      registered: newarr,
+    },
+  });
+  redirect('/my-activities');
 }
 
 /**
