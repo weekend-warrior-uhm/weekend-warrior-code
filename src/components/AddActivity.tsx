@@ -2,7 +2,7 @@
 
 import { Card, Button } from 'react-bootstrap';
 import { Activity } from '@prisma/client';
-import { registerUpdate } from '@/lib/dbActions';
+import { registerUpdateMain, registerUpdateMy } from '@/lib/dbActions';
 import swal from 'sweetalert';
 
 /**
@@ -25,13 +25,14 @@ const formatDate = (date: string) => {
 };
 
 /* Renders a single row in the List table. See list/page.tsx. */
-const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isRegistered }:
+const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isRegistered, kind }:
 {
   activity: Activity,
   owner: string,
   currentUserEmail: string | null | undefined,
   currentUserRole: string,
-  isRegistered: boolean
+  isRegistered: boolean,
+  kind: string,
 }) => {
   const handleSignUp = () => {
     console.log('Signing up for activity:', activity.name);
@@ -45,9 +46,13 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
       });
     } else {
       activity.registered.push(currentUserEmail);
-      registerUpdate(activity.id, activity.registered);
+      if (kind === 'main') { // Redir to main page
+        registerUpdateMain(activity.id, activity.registered);
+      } else { // Redir to my-activities page
+        registerUpdateMy(activity.id, activity.registered);
+      }
 
-      swal('Success', 'You have registered for this activity', 'success', {
+      swal('Success', 'You have unregistered for this activity', 'success', {
         timer: 2000,
       });
     }
@@ -61,9 +66,14 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
       });
     } else if (activity.registered.includes(currentUserEmail)) {
       activity.registered.splice(activity.registered.indexOf(currentUserEmail), 1);
-      registerUpdate(activity.id, activity.registered);
 
-      swal('Success', 'You have registered for this activity', 'success', {
+      if (kind === 'main') { // Redir to main page
+        registerUpdateMain(activity.id, activity.registered);
+      } else { // Redir to my-activities page
+        registerUpdateMy(activity.id, activity.registered);
+      }
+
+      swal('Success', 'You have unregistered for this activity', 'success', {
         timer: 2000,
       });
     }
