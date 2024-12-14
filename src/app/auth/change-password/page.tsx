@@ -1,3 +1,5 @@
+// src/app/auth/change-password/page.tsx
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -13,10 +15,8 @@ type ChangePasswordForm = {
   oldpassword: string;
   password: string;
   confirmPassword: string;
-  // acceptTerms: boolean;
 };
 
-/** The change password page. */
 const ChangePassword = () => {
   const { data: session, status } = useSession();
   const email = session?.user?.email || '';
@@ -41,7 +41,6 @@ const ChangePassword = () => {
   });
 
   const onSubmit = async (data: ChangePasswordForm) => {
-    // console.log(JSON.stringify(data, null, 2));
     await changePassword({ email, ...data });
     await swal('Password Changed', 'Your password has been changed', 'success', { timer: 2000 });
     reset();
@@ -61,7 +60,7 @@ const ChangePassword = () => {
               <Card.Body>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                   <Form.Group className="form-group">
-                    <Form.Label>Old Passord</Form.Label>
+                    <Form.Label>Old Password</Form.Label>
                     <input
                       type="password"
                       {...register('oldpassword')}

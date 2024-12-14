@@ -1,9 +1,10 @@
+// src\components\Navbar.tsx
 'use client';
 
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, PencilSquare } from 'react-bootstrap-icons';
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
@@ -48,15 +49,20 @@ const NavBar: React.FC = () => {
           <Nav className="justify-content-end">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
-                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
-                  <BoxArrowRight />
+                <NavDropdown.Item id="login-dropdown-edit-info" href="/auth/edituserinfo">
+                  <PencilSquare />
                   {' '}
-                  Sign Out
+                  Edit Info
                 </NavDropdown.Item>
                 <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
                   <Lock />
                   {' '}
                   Change Password
+                </NavDropdown.Item>
+                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
+                  <BoxArrowRight />
+                  {' '}
+                  Sign Out
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (

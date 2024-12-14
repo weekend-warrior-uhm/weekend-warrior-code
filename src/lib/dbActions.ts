@@ -122,3 +122,20 @@ export async function changePassword(credentials: { email: string; password: str
     },
   });
 }
+
+/**
+ * Updates user information in the database.
+ * @param credentials - The user credentials for updating the account.
+ */
+export async function updateUser(credentials: Omit<Credentials, 'password'>) {
+  await prisma.user.update({
+    where: { email: credentials.email },
+    data: {
+      username: credentials.username,
+      fullName: credentials.fullName,
+      phone: credentials.phone,
+      gender: credentials.gender,
+      interests: credentials.interests,
+    },
+  });
+}
