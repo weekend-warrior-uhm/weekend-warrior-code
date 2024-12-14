@@ -39,7 +39,14 @@ const OwnedActivitiesPage = async () => {
             ) : (
               <Row xs={1} md={2} lg={3} className="g-4">
                 {activities
-                  .sort((a, b) => a.date.localeCompare(b.date))
+                  .sort((a, b) => {
+                    // First, sort by date
+                    const dateComparison = a.date.localeCompare(b.date);
+                    if (dateComparison !== 0) return dateComparison;
+
+                    // If dates are the same, then sort by time
+                    return a.time.localeCompare(b.time);
+                  })
                   .map((activity) => (
                     <Col key={activity.id}>
                       <AddActivity
