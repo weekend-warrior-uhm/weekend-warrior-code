@@ -12,8 +12,8 @@
       "location": "Hanauma Bay, Honolulu, HI",
       "date": "2024-11-26",
       "time": "9:30",
-      "author": "John Doe",
-      "author_email": "john@foo.com",
+      "author": "Jane Doe",
+      "author_email": "jane@foo.com",
       "duration": 3.0,
       "registered": [],
       "message": "We hope you enjoy the experience at Hanauma Bay! Let us know if there are any questions."
@@ -24,8 +24,8 @@
       "location": "Paradise Cove, Kapolei, HI",
       "date": "2024-11-30",
       "time": "6:00",
-      "author": "John Doe",
-      "author_email": "john@foo.com",
+      "author": "Admin User",
+      "author_email": "admin@foo.com",
       "duration": 2.0,
       "registered": [],
       "message": "We hope you enjoy the experience at Paradise Cove! Let us know if there are any questions."
@@ -36,25 +36,23 @@
       "location": "Diamond Head State Monument, Honolulu, HI",
       "date": "2024-12-01",
       "time": "7:00",
-      "author": "John Doe",
-      "author_email": "john@foo.com",
+      "author": "Jane Doe",
+      "author_email": "jane@foo.com",
       "duration": 4.0,
-      "registered": [
-        "john@foo.com"
-      ],
+      "registered": [],
       "message": "We hope you enjoy the experience at Diamond Head Crater! Let us know if there are any questions."
     },
     {
       "name": "Kayaking at Kailua Beach",
       "description": "Paddle through the calm waters of Kailua Beach with beautiful views of the Mokulua Islands.",
       "location": "Kailua Beach Park, Kailua, HI",
-      "date": "2024-12-05",
+      "date": "2024-12-20",
       "time": "8:00",
       "author": "John Doe",
       "author_email": "john@foo.com",
       "duration": 2.5,
       "registered": [
-        "admin@foo.com"
+        "john@foo.com"
       ],
       "message": "We hope you enjoy the experience at Kailua Beach! Let us know if there are any questions."
     },
@@ -62,24 +60,22 @@
       "name": "Sunset Cruise along Waikiki",
       "description": "Enjoy a relaxing boat ride with panoramic views of the sunset over the Pacific Ocean.",
       "location": "Waikiki Beach, Honolulu, HI",
-      "date": "2024-12-10",
+      "date": "2024-12-25",
       "time": "17:30",
-      "author": "John Doe",
-      "author_email": "john@foo.com",
+      "author": "Jane Doe",
+      "author_email": "jane@foo.com",
       "duration": 3.0,
-      "registered": [
-        "john@foo.com"
-      ],
+      "registered": [],
       "message": "We hope you enjoy the experience at Waikiki! Let us know if there are any questions."
     },
     {
       "name": "Ziplining on the North Shore",
       "description": "Experience the thrill of ziplining through lush tropical forests on Oahu's North Shore.",
       "location": "North Shore, Oahu, HI",
-      "date": "2024-12-15",
+      "date": "2024-12-31",
       "time": "13:00",
-      "author": "Jane Doe",
-      "author_email": "jane@foo.com",
+      "author": "Admin User",
+      "author_email": "admin@foo.com",
       "duration": 4.0,
       "registered": [
         "john@foo.com"
