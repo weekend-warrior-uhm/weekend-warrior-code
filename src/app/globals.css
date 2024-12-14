@@ -18,7 +18,7 @@ body {
   background-image: url("/images/bgs-blurred.png");
   background-size: cover;
   background-repeat: no-repeat; /* Ensure the background image does not repeat */
-  background-position: center; /* Center the background image */
+  background-position: center center; /* Center the background image */
   background-attachment: fixed; /* Ensure the background image stays fixed in place */
   background-color: #000000; /* Set a default background color */
 }
