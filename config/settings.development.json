@@ -51,9 +51,7 @@
       "author": "John Doe",
       "author_email": "john@foo.com",
       "duration": 2.5,
-      "registered": [
-        "john@foo.com"
-      ],
+      "registered": [],
       "message": "We hope you enjoy the experience at Kailua Beach! Let us know if there are any questions."
     },
     {
