@@ -11,18 +11,6 @@ const AddUser = ({ user }: { user: User }) => (
     </Card.Header>
     <Card.Body>
       <Card.Text>
-        <strong>Email:</strong>
-        {' '}
-        {user.email}
-        <br />
-        <strong>Full Name:</strong>
-        {' '}
-        {user.fullName}
-        <br />
-        <strong>Phone:</strong>
-        {' '}
-        {user.phone}
-        <br />
         <strong>Gender:</strong>
         {' '}
         {user.gender}
