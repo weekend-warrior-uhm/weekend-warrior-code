@@ -4,22 +4,11 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Activity } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { CreateActivitySchema } from '@/lib/validationSchemas';
 import { createActivity } from '@/lib/dbActions';
 
-const onSubmit = async (data: Activity) => {
-  // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
-  const cleanedData = {
-    ...data,
-    registered: [],
-    followup: '',
-  };
-  await createActivity(cleanedData);
-  swal('Success', 'The activity has been updated', 'success', {
-    timer: 2000,
-  });
-};
+type ActivityInput = Prisma.ActivityCreateInput;
 
 const CreateActivityForm = ({ currentUserName, currentUserEmail }:
 { currentUserName: string, currentUserEmail: string }) => {
@@ -28,9 +17,19 @@ const CreateActivityForm = ({ currentUserName, currentUserEmail }:
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Activity>({
+  } = useForm<ActivityInput>({
     resolver: yupResolver(CreateActivitySchema),
   });
+
+  const onSubmit = async (data: ActivityInput) => {
+    await createActivity({
+      ...data,
+      registered: [],
+    });
+    swal('Success', 'The activity has been created', 'success', {
+      timer: 2000,
+    });
+  };
 
   return (
     <Container className="py-3">

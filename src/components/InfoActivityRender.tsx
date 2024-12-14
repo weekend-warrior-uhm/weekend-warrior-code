@@ -43,7 +43,7 @@ const InfoActivityRender = ({ activity }: { activity: Activity }) => (
           <Col className="text-center">
             <h3>Follow up from Activity Owner</h3>
             <hr />
-            <p>{activity.followup === '' ? 'No follow up has been posted yet' : activity.followup}</p>
+            <p>No follow up has been posted yet</p>
           </Col>
         </Col>
       </Row>

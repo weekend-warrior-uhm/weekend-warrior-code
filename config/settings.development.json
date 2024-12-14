@@ -16,8 +16,7 @@
       "author_email": "john@foo.com",
       "duration": 3.0,
       "registered": [],
-      "message": "We hope you enjoy the experience at Hanauma Bay! Let us know if there are any questions.",
-      "followup": ""
+      "message": "We hope you enjoy the experience at Hanauma Bay! Let us know if there are any questions."
     },
     {
       "name": "Luau at Paradise Cove",
@@ -29,9 +28,7 @@
       "author_email": "john@foo.com",
       "duration": 2.0,
       "registered": [],
-      "message": "We hope you enjoy the experience at Paradise Cove! Let us know if there are any questions.",
-      "followup": ""
-      
+      "message": "We hope you enjoy the experience at Paradise Cove! Let us know if there are any questions."
     },
     {
       "name": "Hiking at Diamond Head Crater",
@@ -45,8 +42,7 @@
       "registered": [
         "john@foo.com"
       ],
-      "message": "We hope you enjoy the experience at Diamond Head Crater! Let us know if there are any questions.",
-      "followup": ""
+      "message": "We hope you enjoy the experience at Diamond Head Crater! Let us know if there are any questions."
     },
     {
       "name": "Kayaking at Kailua Beach",
@@ -60,8 +56,7 @@
       "registered": [
         "admin@foo.com"
       ],
-      "message": "We hope you enjoy the experience at Kailua Beach! Let us know if there are any questions.",
-      "followup": ""
+      "message": "We hope you enjoy the experience at Kailua Beach! Let us know if there are any questions."
     },
     {
       "name": "Sunset Cruise along Waikiki",
@@ -75,8 +70,7 @@
       "registered": [
         "john@foo.com"
       ],
-      "message": "We hope you enjoy the experience at Waikiki! Let us know if there are any questions.",
-      "followup": ""
+      "message": "We hope you enjoy the experience at Waikiki! Let us know if there are any questions."
     },
     {
       "name": "Ziplining on the North Shore",
@@ -90,8 +84,7 @@
       "registered": [
         "john@foo.com"
       ],
-      "message": "We hope you enjoy the experience at the North Shore! Let us know if there are any questions.",
-      "followup": ""
+      "message": "We hope you enjoy the experience at the North Shore! Let us know if there are any questions."
     }
   ]
 }

@@ -35,7 +35,6 @@ const AdminPage = async () => {
                   <th>Duration</th>
                   <th>Registered Users</th>
                   <th>Message</th>
-                  <th>Follow Up</th>
                   <th>Edit</th>
                 </tr>
               </thead>

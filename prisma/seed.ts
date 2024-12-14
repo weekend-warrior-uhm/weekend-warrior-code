@@ -58,7 +58,6 @@ async function main() {
         duration: data.duration,
         registered: data.registered,
         message: data.message,
-        followup: data.followup,
       },
     });
   });

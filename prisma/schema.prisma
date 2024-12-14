@@ -29,7 +29,7 @@ model User {
 }
 
 model Activity {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   name          String
   description   String
   location      String
@@ -40,5 +40,4 @@ model Activity {
   duration      Float
   registered    String[]
   message       String
-  followup      String
 }

@@ -13,7 +13,6 @@ const onSubmit = async (data: Activity) => {
   const cleanedData = {
     ...data,
     registered: data.registered.filter((user) => user.trim() !== ''),
-    followup: new Date() < new Date(data.date) ? '' : data.followup, // If the date has not passed, set as ''
   };
   await editActivity(cleanedData);
   swal('Success', 'The activity has been updated', 'success', {
@@ -115,22 +114,13 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                   <input
                     type="text"
                     {...register('message')}
-                    defaultValue={activity.message}
                     required
                     className={`form-control ${errors.message ? 'is-invalid' : ''}`}
                   />
                   <div className="invalid-feedback">{errors.message?.message}</div>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Follow Up Message</Form.Label>
-                  <input
-                    type="text"
-                    {...register('followup')}
-                    defaultValue={activity.followup}
-                    className={`form-control ${errors.followup ? 'is-invalid' : ''}`}
-                    disabled={new Date() < new Date(activity.date)} // Only enter in the field if the date has passed
-                  />
-                  <div className="invalid-feedback">{errors.followup?.message}</div>
+                  <Form.Text className="text-muted">
+                    Only registered users will be able to see this message.
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group>
                   {/* No one should be able to edit the list of registered users */}

@@ -33,7 +33,6 @@ export async function createActivity(data: Omit<Activity, 'id'>) {
       duration: data.duration,
       registered: data.registered,
       message: data.message,
-      followup: data.followup,
     },
   });
   redirect('/activities');
@@ -57,7 +56,6 @@ export async function editActivity(data: Activity) {
       duration: data.duration,
       registered: data.registered,
       message: data.message,
-      followup: data.followup,
     },
   });
   redirect('/activities');

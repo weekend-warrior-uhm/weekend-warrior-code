@@ -2,7 +2,7 @@ import { Activity } from '@prisma/client';
 
 /* Renders a single row in the List Activities table. See list/page.tsx. */
 const ActivityItemAdmin = ({ name, description, location, date, time, author, author_email, duration,
-  registered, message, followup, id }: Activity) => (
+  registered, message, id }: Activity) => (
     <tr>
       <td>{name}</td>
       <td>{description}</td>
@@ -14,7 +14,6 @@ const ActivityItemAdmin = ({ name, description, location, date, time, author, au
       <td>{duration}</td>
       <td>{registered.join(', ')}</td>
       <td>{message}</td>
-      <td>{followup}</td>
       <td>
         <a href={`/edit/${id}`}>Edit</a>
       </td>

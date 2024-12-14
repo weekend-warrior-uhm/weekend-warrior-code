@@ -11,6 +11,7 @@ export const EditActivitySchema = Yup.object({
   author_email: Yup.string().required(),
   duration: Yup.number().positive().required(),
   registered: Yup.array().required(),
+  message: Yup.string().required(),
 });
 
 export const CreateActivitySchema = Yup.object({
@@ -23,4 +24,8 @@ export const CreateActivitySchema = Yup.object({
   author_email: Yup.string().required(),
   duration: Yup.number().positive().required(),
   message: Yup.string().required(),
+});
+
+export const test = Yup.object({
+  name: Yup.string().required(),
 });
