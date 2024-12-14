@@ -34,22 +34,28 @@ const MyActivitiesPage = async () => {
         <Row>
           <Col>
             <h2 className="text-center">Registered Activities</h2>
-            <Row xs={1} md={2} lg={3} className="g-4">
-              {activities
-                .sort((a, b) => a.date.localeCompare(b.date))
-                .map((activity) => (
-                  <Col key={activity.id}>
-                    <AddActivity
-                      activity={activity}
-                      owner={activity.author_email}
-                      currentUserEmail={user?.email}
-                      isRegistered={activity.registered.includes(user?.email ?? '')}
-                      currentUserRole={user?.role ?? ''}
-                      kind="my"
-                    />
-                  </Col>
-                ))}
-            </Row>
+            {activities.length === 0 ? (
+              <div className="text-center my-3">
+                <p>No activities found</p>
+              </div>
+            ) : (
+              <Row xs={1} md={2} lg={3} className="g-4">
+                {activities
+                  .sort((a, b) => a.date.localeCompare(b.date))
+                  .map((activity) => (
+                    <Col key={activity.id}>
+                      <AddActivity
+                        activity={activity}
+                        owner={activity.author_email}
+                        currentUserEmail={user?.email}
+                        isRegistered={activity.registered.includes(user?.email ?? '')}
+                        currentUserRole={user?.role ?? ''}
+                        kind="my"
+                      />
+                    </Col>
+                  ))}
+              </Row>
+            )}
           </Col>
         </Row>
       </Container>

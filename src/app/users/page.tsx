@@ -31,13 +31,19 @@ const ListUsers = async () => {
         <Row>
           <Col>
             <h2 className="text-center">Users</h2>
-            <Row xs={1} md={2} lg={3} className="g-4">
-              {users.map((user) => (
-                <Col key={user.id}>
-                  <AddUser user={user} />
-                </Col>
-              ))}
-            </Row>
+            {users.length === 0 ? (
+              <div className="text-center my-3">
+                <p>No users found</p>
+              </div>
+            ) : (
+              <Row xs={1} md={2} lg={3} className="g-4">
+                {users.map((user) => (
+                  <Col key={user.id}>
+                    <AddUser user={user} />
+                  </Col>
+                ))}
+              </Row>
+            )}
           </Col>
         </Row>
       </Container>
