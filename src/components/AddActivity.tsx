@@ -83,6 +83,10 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
     window.location.href = `/edit/${id}`;
   };
 
+  const handleInfoRedirect = (id: number) => {
+    window.location.href = `/info/${id}`;
+  };
+
   return (
     <Card className="h-100">
       <Card.Header>
@@ -123,6 +127,11 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
         {((owner === currentUserEmail) || (currentUserRole === 'ADMIN')) && (
           <Button type="button" variant="danger" className="ms-auto" onClick={() => handleEdit(activity.id)}>
             Edit
+          </Button>
+        )}
+        {(kind === 'my') && (
+          <Button type="button" variant="dark" className="ms-auto" onClick={() => handleInfoRedirect(activity.id)}>
+            Activity Info
           </Button>
         )}
       </Card.Footer>

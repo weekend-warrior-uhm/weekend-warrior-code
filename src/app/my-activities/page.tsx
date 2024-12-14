@@ -33,7 +33,7 @@ const MyActivitiesPage = async () => {
       <Container id="list" fluid className="py-3">
         <Row>
           <Col>
-            <h2 className="text-center">My Activities</h2>
+            <h2 className="text-center">Registered Activities</h2>
             <Row xs={1} md={2} lg={3} className="g-4">
               {activities
                 .sort((a, b) => a.date.localeCompare(b.date))
