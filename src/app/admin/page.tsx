@@ -1,10 +1,10 @@
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import ActivityItemAdmin from '@/components/ActivityItemAdmin';
-import ActivityUserAdmin from '@/components/ActivityUserAdmin';
 import { prisma } from '@/lib/prisma';
 import { adminProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
+import ActivityUserAdmin from '@/components/ActivityUserAdmin';
 
 const AdminPage = async () => {
   const session = await getServerSession(authOptions);
