@@ -55,7 +55,7 @@ const SignUp = () => {
 
   return (
     <main>
-      <Container>
+      <Container style={{ padding: '20px 0' }}>
         <Row className="justify-content-center">
           <Col xs={5}>
             <h1 className="text-center">Sign Up</h1>
@@ -158,9 +158,6 @@ const SignUp = () => {
               <Card.Footer>
                 Already have an account?
                 <a href="/auth/signin">Sign in</a>
-                <br />
-                Want to edit your information?
-                <a href="/auth/edituserinfo">Edit your info</a>
               </Card.Footer>
             </Card>
           </Col>

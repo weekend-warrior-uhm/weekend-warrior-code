@@ -65,7 +65,7 @@ const EditUser = () => {
 
   return (
     <main>
-      <Container style={{ paddingBottom: '50px' }}>
+      <Container style={{ padding: '20px 0' }}>
         <Row className="justify-content-center">
           <Col xs={5}>
             <h1 className="text-center">Edit User Information</h1>
