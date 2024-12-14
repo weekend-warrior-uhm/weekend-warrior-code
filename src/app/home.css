@@ -23,6 +23,18 @@
     margin: 3% auto; /* Center the box and give equal top/bottom spacing */
     transform: none; /* Remove transform for better responsiveness */
   }
+
+  .delete-button-box {
+    background-color: rgba(0, 0, 0, 0.3); /* Black with 30% transparency */
+    color: white;
+    padding: 2rem; /* Responsive padding */
+    border-radius: 10px;
+    max-width: 300px; /* Adjust max-width as needed */
+    text-align: center;
+    position: relative;
+    margin: 3% auto; /* Center the box and give equal top/bottom spacing */
+    transform: none; /* Remove transform for better responsiveness */
+  }
   
   /* Logo styles */
   .logo {

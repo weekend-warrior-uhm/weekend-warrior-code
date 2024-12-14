@@ -126,7 +126,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
         )}
         {((owner === currentUserEmail) || (currentUserRole === 'ADMIN')) && (
           <Button type="button" variant="danger" className="ms-auto" onClick={() => handleEdit(activity.id)}>
-            Edit
+            Edit/Delete
           </Button>
         )}
         {(kind === 'my') && (

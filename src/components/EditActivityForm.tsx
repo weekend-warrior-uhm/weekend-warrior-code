@@ -31,6 +31,10 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
   });
   // console.log(activity);
 
+  const handleDelete = (id: number) => {
+    window.location.href = `/delete/${id}`;
+  };
+
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -162,13 +166,18 @@ const EditActivityForm = ({ activity }: { activity: Activity }) => {
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
-                      <Button type="submit" variant="primary">
+                      <Button type="submit" variant="primary" className="ms-auto">
                         Submit
                       </Button>
                     </Col>
                     <Col>
-                      <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
+                      <Button type="button" onClick={() => reset()} variant="warning" className="ms-auto">
                         Reset
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button onClick={() => handleDelete(activity.id)} variant="danger" className="ms-auto">
+                        Delete Activity
                       </Button>
                     </Col>
                   </Row>

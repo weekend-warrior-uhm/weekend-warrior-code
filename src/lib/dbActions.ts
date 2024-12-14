@@ -89,7 +89,7 @@ export async function deleteActivity(id: number) {
   await prisma.activity.delete({
     where: { id },
   });
-  redirect('/list');
+  redirect('/activities');
 }
 
 /**
