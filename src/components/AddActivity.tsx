@@ -52,7 +52,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
         registerUpdateMy(activity.id, activity.registered);
       }
 
-      swal('Success', 'You have unregistered for this activity', 'success', {
+      swal('Success', 'You have registered for this activity', 'success', {
         timer: 2000,
       });
     }
