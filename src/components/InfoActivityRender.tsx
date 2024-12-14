@@ -13,15 +13,33 @@ const InfoActivityRender = ({ activity }: { activity: Activity }) => (
             <h1>{activity.name}</h1>
             <hr />
             <p>Welcome to the activity info page!</p>
-            <p>Here, the owner of the activity can post important information to those attending the event</p>
-            <p>Additionally, they can follow up with the registered users by posting here</p>
-            <p>Only those who registered to the activity can see this information</p>
-            <p>Please contact the owner of this activity for inquiries:</p>
-            <h4>
-              {activity.author}
-              &nbsp;-&nbsp;
-              {activity.author_email}
-            </h4>
+            <span>Here, the owner of the activity can post important information to those attending the event</span>
+            <br />
+            <span>Additionally, they can follow up with the registered users by posting here</span>
+            <br />
+            <span>Only those who registered to the activity can see this information</span>
+            <p>
+              Please contact the activity organizer&nbsp;
+              <u>
+                {activity.author}
+                &nbsp;(
+                {activity.author_email}
+                )
+              </u>
+              &nbsp;if you have any questions
+            </p>
+            <br />
+            <h4>Registered Users:</h4>
+            {activity.registered.length > 0 ? (
+              activity.registered.map((user) => (
+                <p>
+                  -&nbsp;
+                  {user}
+                </p>
+              ))
+            ) : (
+              <p>No registered users.</p>
+            )}
           </Col>
         </Col>
       </Row>
