@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import ActivityItemAdmin from '@/components/ActivityItemAdmin';
+import ActivityUserAdmin from '@/components/ActivityUserAdmin';
 import { prisma } from '@/lib/prisma';
 import { adminProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
@@ -53,15 +54,17 @@ const AdminPage = async () => {
               <thead>
                 <tr>
                   <th>Email</th>
+                  <th>Username</th>
+                  <th>Full Name</th>
+                  <th>Phone Number</th>
+                  <th>Gender</th>
+                  <th>Interests</th>
                   <th>Role</th>
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.email}</td>
-                    <td>{user.role}</td>
-                  </tr>
+                {users.map((item) => (
+                  <ActivityUserAdmin key={item.id} {...item} />
                 ))}
               </tbody>
             </Table>
