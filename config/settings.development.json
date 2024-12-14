@@ -76,7 +76,9 @@
       "author_email": "admin@foo.com",
       "duration": 4.0,
       "registered": [
-        "john@foo.com"
+        "john@foo.com",
+        "jane@foo.com",
+        "admin@foo.com"
       ],
       "message": "We hope you enjoy the experience at the North Shore! Let us know if there are any questions."
     }
