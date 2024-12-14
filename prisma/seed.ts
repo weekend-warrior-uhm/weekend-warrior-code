@@ -57,6 +57,8 @@ async function main() {
         author_email: data.author_email,
         duration: data.duration,
         registered: data.registered,
+        message: data.message,
+        followup: data.followup,
       },
     });
   });

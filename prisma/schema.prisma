@@ -39,4 +39,6 @@ model Activity {
   author_email  String
   duration      Float
   registered    String[]
+  message       String
+  followup      String
 }

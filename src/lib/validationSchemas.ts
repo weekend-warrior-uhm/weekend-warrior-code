@@ -22,8 +22,5 @@ export const CreateActivitySchema = Yup.object({
   author: Yup.string().required(),
   author_email: Yup.string().required(),
   duration: Yup.number().positive().required(),
-});
-
-export const test = Yup.object({
-  name: Yup.string().required(),
+  message: Yup.string().required(),
 });
