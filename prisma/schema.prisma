@@ -41,3 +41,11 @@ model Activity {
   registered    String[]
   message       String
 }
+
+model Report {
+  id             Int      @id @default(autoincrement())
+  activityId     Int
+  activityName   String
+  activityAuthor String
+  reportText     String
+}
