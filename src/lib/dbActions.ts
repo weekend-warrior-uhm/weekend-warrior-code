@@ -1,6 +1,6 @@
 'use server';
 
-import { Activity, PrismaClient } from '@prisma/client';
+import { Activity, PrismaClient, Report } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
 
@@ -138,6 +138,21 @@ export async function updateUser(credentials: Omit<Credentials, 'password'>) {
       phone: credentials.phone,
       gender: credentials.gender,
       interests: credentials.interests,
+    },
+  });
+}
+
+/**
+ * Creates a new report in the database.
+ * @param data - The report data to create.
+ */
+export async function createReport(data: Omit<Report, 'id'>) {
+  await prisma.report.create({
+    data: {
+      activityId: data.activityId,
+      activityName: data.activityName,
+      activityAuthor: data.activityAuthor,
+      reportText: data.reportText,
     },
   });
 }

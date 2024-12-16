@@ -26,6 +26,14 @@ export const CreateActivitySchema = Yup.object({
   message: Yup.string().required(),
 });
 
+// New validation schema for report submission
+export const ReportActivitySchema = Yup.object({
+  activityId: Yup.number().required(),
+  activityName: Yup.string().required(),
+  activityAuthor: Yup.string().required(),
+  reportText: Yup.string().required().max(500),
+});
+
 export const test = Yup.object({
   name: Yup.string().required(),
 });
