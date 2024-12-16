@@ -110,7 +110,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
           &nbsp;hours)
         </Card.Text>
         <Card.Text>
-          Activity by:
+          Activity by:&nbsp;
           {activity.author}
         </Card.Text>
         <Card.Text>
