@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, PencilSquare } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, PencilSquare, FileEarmarkText } from 'react-bootstrap-icons';
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
@@ -45,13 +45,6 @@ const NavBar: React.FC = () => {
             >
               Owned Activities
             </Nav.Link>
-            {currentUser && role === 'ADMIN' ? (
-              <Nav.Link id="admin-nav" href="/admin" key="admin" active={pathName === '/admin'}>
-                Admin
-              </Nav.Link>
-            ) : (
-              ''
-            )}
           </Nav>
           <Nav className="justify-content-end">
             {session ? (
@@ -66,6 +59,20 @@ const NavBar: React.FC = () => {
                   {' '}
                   Change Password
                 </NavDropdown.Item>
+                {role === 'ADMIN' && (
+                  <>
+                    <NavDropdown.Item id="login-dropdown-admin" href="/admin">
+                      <FileEarmarkText />
+                      {' '}
+                      Admin
+                    </NavDropdown.Item>
+                    <NavDropdown.Item id="login-dropdown-admin-report" href="/admin-report">
+                      <FileEarmarkText />
+                      {' '}
+                      Reports
+                    </NavDropdown.Item>
+                  </>
+                )}
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
                   <BoxArrowRight />
                   {' '}
