@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import '../home.css'; // Import the CSS file
 
 const ContactSupport = () => (
   <main>
-    <Container className="py-5">
-      <h2>Contact & Support</h2>
+    <Container className="py-5 info-box">
+      <h1>Contact & Support</h1>
 
       <section>
         <h3>Contact Us</h3>
@@ -16,30 +17,44 @@ const ContactSupport = () => (
 
       <section>
         <h3>FAQs</h3>
-        <ul>
-          <li>
-            How do I create an account? Click on the &quot;Sign Up&quot; button on the homepage and fill in your details.
-          </li>
-          <li>
-            How do I join an activity? Navigate to the &quot;Activities&quot; page and click on &quot;Join&quot; for the desired activity.
-          </li>
-          <li>
-            How do I create an activity? Go to the &quot;Activities&quot; page and click on &quot;Create Activity.&quot; Fill out the form and submit.
-          </li>
-          <li>
-            How do I manage my account? Click on your profile icon, select &quot;Account Settings,&quot; and update your information.
-          </li>
-          <li>
-            How do I report an issue? Go to the &quot;Contact&quot; page and fill out the form, or email us directly at support@weekendwarrior.com.
-          </li>
-        </ul>
+        <li>
+          How do I create an account?
+          <br />
+          Click on the &quot;Sign Up&quot; button on the homepage and fill in your details.
+        </li>
+        <br />
+        <li>
+          How do I join an activity?
+          <br />
+          Navigate to the &quot;Activities&quot; page and click on &quot;Join&quot; for the desired activity.
+        </li>
+        <br />
+        <li>
+          How do I create an activity?
+          <br />
+          Go to the &quot;Activities&quot; page and click on &quot;Create Activity.&quot; Fill out the form and submit.
+        </li>
+        <br />
+        <li>
+          How do I manage my account?
+          <br />
+          Click on your profile icon, select &quot;Account Settings,&quot; and update your information.
+        </li>
+        <br />
+        <li>
+          How do I report an issue?
+          <br />
+          Go to the &quot;Contact&quot; page and fill out the form, or email us directly at support@weekendwarrior.com.
+        </li>
       </section>
+
+      <br />
 
       <section>
         <h3>Additional Resources</h3>
-        <p>Community Guidelines: Ensure a safe and respectful experience for all users.</p>
-        <p>Privacy Policy: Learn more about how we protect your data.</p>
-        <p>Terms of Service: Review the terms and conditions that govern the use of our service.</p>
+        <li>Community Guidelines: Ensure a safe and respectful experience for all users.</li>
+        <li>Privacy Policy: Learn more about how we protect your data.</li>
+        <li>Terms of Service: Review the terms and conditions that govern the use of our service.</li>
       </section>
     </Container>
   </main>
