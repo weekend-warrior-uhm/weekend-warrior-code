@@ -5,7 +5,7 @@ import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Activity } from '@prisma/client';
 import { registerUpdateMain, registerUpdateMy } from '@/lib/dbActions';
 import swal from 'sweetalert';
-import ReportActivity from './ReportActivity';
+import ReportActivityForm from './ReportActivityForm';
 import './component.css'; // Renamed to component.css as needed
 
 /**
@@ -176,7 +176,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
                 >
                   Report
                 </Button>
-                <ReportActivity activity={activity} show={showReportModal} handleClose={handleCloseReportModal} />
+                <ReportActivityForm activity={activity} show={showReportModal} handleClose={handleCloseReportModal} />
               </>
             )}
           </Col>

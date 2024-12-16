@@ -156,3 +156,14 @@ export async function createReport(data: Omit<Report, 'id'>) {
     },
   });
 }
+
+export async function submitReport(data: Omit<Report, 'id'>) {
+  await prisma.report.create({
+    data: {
+      activityId: data.activityId,
+      activityName: data.activityName,
+      activityAuthor: data.activityAuthor,
+      reportText: data.reportText,
+    },
+  });
+}
