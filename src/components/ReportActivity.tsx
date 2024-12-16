@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import swal from 'sweetalert';
-import { prisma } from '@/lib/prisma';
 import { Activity } from '@prisma/client';
 
 const ReportActivity = (
@@ -19,14 +18,18 @@ const ReportActivity = (
       });
       return;
     }
-    // Save the report to the database
-    await prisma.report.create({
-      data: {
+    // Call the server-side function to create the report
+    await fetch('/api/reports', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         activityId: activity.id,
         activityName: activity.name,
         activityAuthor: activity.author,
         reportText,
-      },
+      }),
     });
     swal('Success', 'Your report has been submitted', 'success', {
       timer: 2000,

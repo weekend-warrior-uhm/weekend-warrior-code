@@ -1,14 +1,23 @@
-import { getServerSession } from 'next-auth';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-import { adminProtectedPage } from '@/lib/page-protection';
-import authOptions from '@/lib/authOptions';
+
+// Define the type for reports
+type Report = {
+  id: number;
+  activityId: number;
+  activityName: string;
+  activityAuthor: string;
+  reportText: string;
+};
+
+// Server-side async function to fetch data
+async function getReports(): Promise<Report[]> {
+  const reports = await prisma.report.findMany();
+  return reports;
+}
 
 const ReportPage = async () => {
-  const session = await getServerSession(authOptions);
-  adminProtectedPage(session as { user: { email: string; id: string; randomKey: string } } | null);
-
-  const reports = await prisma.report.findMany({});
+  const reports = await getReports();
 
   return (
     <main>
