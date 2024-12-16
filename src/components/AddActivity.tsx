@@ -114,7 +114,7 @@ const AddActivity = ({ activity, owner, currentUserEmail, currentUserRole, isReg
           {activity.author}
         </Card.Text>
         <Card.Text>
-          Total Registered Users:
+          Total Registered Users:&nbsp;
           {activity.registered.length}
         </Card.Text>
       </Card.Body>
