@@ -31,7 +31,7 @@ export async function createActivity(data: Omit<Activity, 'id'>) {
       author: data.author,
       author_email: data.author_email,
       duration: data.duration,
-      registered: data.registered,
+      registered: [data.author_email], // Automatically register the activity creator
       message: data.message,
     },
   });
